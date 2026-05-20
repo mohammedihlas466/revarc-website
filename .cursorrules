@@ -1,0 +1,81 @@
+# RevArc Website — Core Engineering & Context Rules
+
+## Project Overview
+You are building the RevArc Systems website — a five-page Next.js site for a premium revenue strategy firm serving high-end hospitality brands and boutique spaces. Every visual decision, line of copy, and micro-interaction is pre-specified across your four primary reference documents. Your task is flaw-free execution, not creative interpretation or structural improvisation.
+
+## Tech Stack & Version Locking
+* Next.js 14 (App Router — Strictly enforce Next 14 parameters; do not use Next 15 patterns)
+* React 18 (Strictly enforce React 18 hooks; do not use React 19 primitives)
+* TypeScript (Strict Mode active)
+* Tailwind CSS (Utilized exclusively for layout structural setups, flex, grids, and padding. Zero direct utility color classes allowed)
+* GSAP with ScrollTrigger & SplitText (All scroll mechanics and typographic transitions)
+* @gsap/react (The `useGSAP()` wrapper hook for frame-locked React tracking and automatic component cleanup)
+* lenis/react (Unified modern namespace for inertial smooth scrolling)
+* Lucide React (Line-style icons only: 14×14 or 16×16, currentColor, 1.2px stroke thickness)
+* Approved React background components from `UI_MANIFEST.MD` (MagicUI, ScrollXUI, React Bits, Motion Primitives — installed as code, not iframes or external 3D hosts)
+
+## The Four-File Protocol
+Every page architecture must be assembled with exactly four reference documents fully active within the workspace context:
+1. `MASTER-DESIGN-SYSTEM.md` — CSS variables, component limits, typography layout scales, and breakpoint rules.
+2. `GLOBAL-CONTEXT.md` — Brand voice, audience positioning parameters, proof matrix, and strict content principles.
+3. `UI_MANIFEST.MD` — The master component library registry (integrating custom MagicUI, ScrollXUI, and Motion Primitives links).
+4. `PAGE-0X-[NAME].md` — Core wireframe layouts, locked copy blocks, and exact page execution sequences.
+
+Read and register all four files thoroughly before generating or modifying code. If any of these files are missing from the current prompt context, stop and request them.
+
+## Absolute Framework Rules — Zero Violation Permitted
+
+### 1. Copy & Typography Compliance
+* Use the EXACT copy from the active page document. Do not paraphrase, reorder, rewrite, shorten, or generate alternative copy.
+* Do not generate placeholder text, lorem ipsum strings, or temporary headlines. If a layout section lacks copy, do not build it.
+* Do not append client quotes, testimonials, or performance summaries unless explicitly written in the reference documents.
+* **Strict Core Word Ban:** Never use the word "agency" anywhere—not in layout copy, class declarations, variables, comments, or ARIA labels.
+* **Punctuation Constraint:** Never use an exclamation mark (!) in any text content.
+* **Banned Phrasing Registry:** Completely omit the following words: "passionate," "cutting-edge," "innovative," "solutions," "leverage," "world-class," "elevate," "unlock," "empower," "proven track record," "results-driven," "data-driven," "full-service," "bespoke," "holistic," "game-changer."
+
+### 2. Design System & Token Rigidity
+* All color styling must pull from the defined CSS variables inside `MASTER-DESIGN-SYSTEM.md`. Zero raw hex codes in component files. Write `var(--accent)` or `var(--obsidian)`, never hardcoded hex color values.
+* Font styling must map to font variables: use `var(--font-display)`, `var(--font-ui)`, or `var(--font-mono)`.
+* Do not improvise or invent undocumented component layout rules. If a visual element is required but missing from the design specification, drop a comment flag and map it to the closest approved asset inside `UI_MANIFEST.md`.
+* No generic stock assets, stock photo URLs, or default placeholder image strings. If a custom asset is missing, replace it using a solid `var(--obsidian-raised)` container block or an active canvas transition.
+
+### 3. Accent Color Restriction
+* The primary accent (`var(--accent)` / `var(--accent-bright)`) must appear a maximum of 5 times per complete page view.
+* Each page file documents its exact accent placement counts. Before finishing code assembly, audit all active color classes. If the count exceeds the limit, revert the extra variables to standard layout tones.
+
+### 4. Grid & Responsive Layouts
+* Always follow the structural section layouts defined in the page file. Do not merge, swap, or omit blocks.
+* The system is anchored on a rigid 12-column bento layout grid. Every single visual row structure must mathematically total exactly 12 columns.
+* Responsive scaling behaviors must adhere to your design system breakpoints. Do not guess mobile scaling parameters.
+
+### 5. Animation & Smooth Scroll Engineering
+* **Smooth Scroll Core:** Wrap layout architectures with `<ReactLenis root />` using config rules: `lerp: 0.08`, `smoothWheel: true`, `autoRaf: true`. Sync with GSAP on scroll events using `lenis.on('scroll', ScrollTrigger.update)`.
+* **GSAP Easing Parameters:** All entrance reveals use `"expo.out"`. Fluid background or opacity fades use `"power2.inOut"`.
+* **Motion Pacing:** Never apply bouncing, elastic, or overshooting animation values. Movement must feel expensive and restrained. Nothing snaps violently or overshoots.
+* **Duration minimums:** 0.3s for micro-interactions, 0.5s for standard transitions, and 0.8s to 1.2s for heavy layout scroll triggers.
+* **React Implementation:** Wrap all GSAP timelines inside the official `useGSAP(() => { ... }, { scope: containerRef })` hook to ensure clean DOM rendering and automated structural unmount cleanup.
+
+### 6. React Background & Card Visual Components
+* All atmospheric and hero backgrounds are React components from `UI_MANIFEST.MD` (registry IDs 45–51 and page-specific assignments). No Unicorn Studio, no Spline, no third-party 3D embeds or iframes.
+* Card visuals use approved React backgrounds or canvas animations (Design System Section 09). They bleed to the right boundary or top-right frame — never centered. Text anchors the opposite corner.
+* Background components sit behind content (`pointer-events: none` on the layer unless the manifest explicitly requires interaction).
+* For screens below 768px (Mobile viewports), hide heavy animated backgrounds and substitute CSS gradients or lightweight canvas animations per the active page document.
+
+### 7. Global Styles & Atmospheric Depth
+* The three-radial atmospheric color layout gradient must remain active across every layout view.
+* The structural noise grain overlay canvas must be layered on top of all page elements. Do not remove or reduce its visibility opacity.
+
+## Code Quality & Architecture Standards
+* **File Separation:** Reusable visual assets reside in `/components/ui/`, `/components/backgrounds/`, or `/components/animation/`. Page views live inside `/app/[route]/page.tsx`. Global styles map to `/styles/globals.css`.
+* **Tailwind Usage:** Restrict Tailwind classes entirely to structural utility definitions (e.g., `grid`, `flex`, `gap-4`, `p-8`). Component color tokens must leverage arbitrary values mapping back to your root CSS variables (e.g., `bg-[var(--void)]`, `border-[var(--line-mute)]`).
+* **Accessibility (WCAG):** Ensure text primary elements on deep background fills clear WCAG AAA limits, and secondary text scales hit WCAG AA parameters. All external user links require `target="_blank" rel="noopener noreferrer"`.
+
+## Document Pre-Submission Validation Checklist
+Before closing out a workspace page build, run through these mandatory compliance verifications:
+- [ ] Text diff-check completely confirms copy matches the page file exactly.
+- [ ] Accent color deployment maps precisely to the specified page limit count.
+- [ ] Banned phrasing list is 100% clear from all text structures and comments.
+- [ ] The word "agency" is fully omitted from components, scripts, and styling files.
+- [ ] Exclamation marks are completely removed from all text elements.
+- [ ] All animations run natively through the verified `useGSAP` hook architecture.
+- [ ] Inertial Lenis parameters match framework settings with active GSAP ticker syncing.
