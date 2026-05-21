@@ -9,6 +9,7 @@ import { FieldStudyVisual } from "@/components/home/FieldStudyVisual";
 import { SectionHeader } from "@/components/layout/SectionHeader";
 import { RevArcWordsStagger } from "@/components/ui/RevArcWordsStagger";
 import { SourceCitation } from "@/components/ui/SourceCitation";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { fontMono } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -81,11 +82,12 @@ function FieldStudyBeatRow({
 
 export function OperatingRecordSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const scrollReady = useScrollAnimationReady();
 
   useGSAP(
     () => {
       const section = sectionRef.current;
-      if (!section) return;
+      if (!section || !scrollReady) return;
 
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
@@ -131,7 +133,7 @@ export function OperatingRecordSection() {
         reveal(closure, closure);
       }
     },
-    { scope: sectionRef }
+    { scope: sectionRef, dependencies: [scrollReady] }
   );
 
   return (

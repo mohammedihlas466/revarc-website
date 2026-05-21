@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { fontDisplay, fontUi } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -21,13 +22,14 @@ export function ScrollSpotlightText({
 }: ScrollSpotlightTextProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const beamRef = useRef<HTMLDivElement>(null);
+  const scrollReady = useScrollAnimationReady();
   const words = text.split(" ").filter(Boolean);
 
   useGSAP(
     () => {
       const root = rootRef.current;
       const beam = beamRef.current;
-      if (!root) return;
+      if (!root || !scrollReady) return;
 
       const wordEls = gsap.utils.toArray<HTMLElement>(
         root.querySelectorAll(".scroll-spotlight-word")
@@ -90,7 +92,7 @@ export function ScrollSpotlightText({
         },
       });
     },
-    { scope: rootRef, dependencies: [text] }
+    { scope: rootRef, dependencies: [text, scrollReady] }
   );
 
   return (

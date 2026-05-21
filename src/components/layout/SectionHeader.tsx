@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { fontDisplay, fontMono, fontUi } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -53,11 +54,12 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   const headerRef = useRef<HTMLDivElement>(null);
+  const scrollReady = useScrollAnimationReady();
 
   useGSAP(
     () => {
       const el = headerRef.current;
-      if (!el) return;
+      if (!el || !scrollReady) return;
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -101,7 +103,7 @@ export function SectionHeader({
         );
       }
     },
-    { scope: headerRef }
+    { scope: headerRef, dependencies: [scrollReady] }
   );
 
   return (

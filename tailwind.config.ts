@@ -50,6 +50,14 @@ const config: Config = {
         sans: ["var(--font-ui)", "Bricolage Grotesque", "sans-serif"],
         mono: ["var(--font-mono)", "DM Mono", "monospace"],
       },
+      keyframes: {
+        "border-magic-spin": {
+          to: { transform: "rotate(360deg)" },
+        },
+      },
+      animation: {
+        "border-magic-spin": "border-magic-spin 2s linear infinite",
+      },
     },
   },
   plugins: [],

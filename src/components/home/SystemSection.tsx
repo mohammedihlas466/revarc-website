@@ -9,6 +9,7 @@ import { SectionHeader } from "@/components/layout/SectionHeader";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { MetricChip } from "@/components/ui/MetricChip";
 import { ServiceTag } from "@/components/ui/ServiceTag";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { fontDisplay, fontMono, fontUi } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -45,12 +46,13 @@ const STAT_ITEMS = [
 export function SystemSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const scrollReady = useScrollAnimationReady();
 
   useGSAP(
     () => {
       const section = sectionRef.current;
       const grid = gridRef.current;
-      if (!section || !grid) return;
+      if (!section || !grid || !scrollReady) return;
 
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
@@ -114,7 +116,7 @@ export function SystemSection() {
         });
       }
     },
-    { scope: sectionRef, dependencies: [] }
+    { scope: sectionRef, dependencies: [scrollReady] }
   );
 
   return (

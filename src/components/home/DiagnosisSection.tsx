@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { DiagnosisProofRail } from "@/components/home/DiagnosisProofRail";
 import { SectionHeader } from "@/components/layout/SectionHeader";
 import { SourceCitation } from "@/components/ui/SourceCitation";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { fontDisplay, fontUi } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -28,11 +29,12 @@ const CLOSING_LINE_2 = "A revenue strategy puts it back.";
 
 export function DiagnosisSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const scrollReady = useScrollAnimationReady();
 
   useGSAP(
     () => {
       const section = sectionRef.current;
-      if (!section) return;
+      if (!section || !scrollReady) return;
 
       const layout = section.querySelector(".diagnosis-layout");
       if (!layout) return;
@@ -97,7 +99,7 @@ export function DiagnosisSection() {
         });
       }
     },
-    { scope: sectionRef }
+    { scope: sectionRef, dependencies: [scrollReady] }
   );
 
   return (

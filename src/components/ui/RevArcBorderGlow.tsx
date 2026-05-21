@@ -15,6 +15,12 @@ type RevArcBorderGlowProps = {
   children: ReactNode;
   className?: string;
   animated?: boolean;
+  borderRadius?: number;
+  glowRadius?: number;
+  glowIntensity?: number;
+  edgeSensitivity?: number;
+  coneSpread?: number;
+  fillOpacity?: number;
 };
 
 /**
@@ -24,18 +30,24 @@ export function RevArcBorderGlow({
   children,
   className,
   animated = false,
+  borderRadius = 20,
+  glowRadius = 32,
+  glowIntensity = 0.75,
+  edgeSensitivity = 28,
+  coneSpread = 22,
+  fillOpacity = 0.18,
 }: RevArcBorderGlowProps) {
   return (
     <BorderGlow
       className={cn("bento-border-glow", className)}
       backgroundColor={CANVAS_TOKENS.obsidian}
-      borderRadius={20}
+      borderRadius={borderRadius}
       glowColor="199 87% 74%"
-      glowIntensity={0.75}
-      glowRadius={32}
-      edgeSensitivity={28}
-      coneSpread={22}
-      fillOpacity={0.18}
+      glowIntensity={glowIntensity}
+      glowRadius={glowRadius}
+      edgeSensitivity={edgeSensitivity}
+      coneSpread={coneSpread}
+      fillOpacity={fillOpacity}
       colors={[...REVARC_GLOW_COLORS]}
       animated={animated}
     >

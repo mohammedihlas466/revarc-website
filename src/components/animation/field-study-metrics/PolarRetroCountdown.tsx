@@ -2,10 +2,19 @@
 
 import { useRef, useState } from "react";
 import { RevArcSlidingNumber } from "@/components/ui/RevArcSlidingNumber";
-import { gsap, useGSAP } from "@/lib/gsap";
+import {
+  animate,
+  useMotionValue,
+  useMotionValueEvent,
+  useSpring,
+} from "motion/react";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
+import { ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
 const TARGET = 1_000_000;
+const COUNTER_DURATION = 4;
+const SNAP_STEP = 10_000;
 
 function MillionDisplay({ value }: { value: number }) {
   const clamped = Math.min(TARGET, Math.max(0, value));
@@ -40,44 +49,70 @@ type PolarRetroCountdownProps = {
 
 export function PolarRetroCountdown({ className }: PolarRetroCountdownProps) {
   const rootRef = useRef<HTMLDivElement>(null);
-  const [value, setValue] = useState(0);
+  const targetValue = useMotionValue(0);
+  const smoothValue = useSpring(targetValue, {
+    stiffness: 85,
+    damping: 28,
+    mass: 0.8,
+  });
+  const [display, setDisplay] = useState(0);
+  const lastSnapRef = useRef(-1);
+  const scrollReady = useScrollAnimationReady();
+
+  useMotionValueEvent(smoothValue, "change", (latest) => {
+    const snapped = Math.min(
+      TARGET,
+      Math.round(latest / SNAP_STEP) * SNAP_STEP
+    );
+    if (snapped !== lastSnapRef.current) {
+      lastSnapRef.current = snapped;
+      setDisplay(snapped);
+    }
+  });
 
   useGSAP(
     () => {
       const root = rootRef.current;
-      if (!root) return;
+      if (!root || !scrollReady) return;
 
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
 
       if (reduceMotion) {
-        setValue(TARGET);
+        targetValue.set(TARGET);
+        setDisplay(TARGET);
         return;
       }
 
-      setValue(0);
-      const counter = { val: 0 };
+      targetValue.set(0);
+      setDisplay(0);
+      lastSnapRef.current = -1;
 
-      gsap.to(counter, {
-        val: TARGET,
-        duration: 4.6,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: root,
-          start: "top 88%",
-          toggleActions: "play none none none",
-          once: true,
-        },
-        onUpdate: () => {
-          setValue(Math.round(counter.val));
-        },
-        onComplete: () => {
-          setValue(TARGET);
+      const st = ScrollTrigger.create({
+        trigger: root,
+        start: "top 88%",
+        once: true,
+        onEnter: () => {
+          lastSnapRef.current = -1;
+          targetValue.set(0);
+          setDisplay(0);
+          animate(targetValue, TARGET, {
+            duration: COUNTER_DURATION,
+            ease: [0.22, 0.03, 0.25, 1],
+            onComplete: () => {
+              lastSnapRef.current = TARGET;
+              setDisplay(TARGET);
+            },
+          });
         },
       });
+
+      return () => {
+        st.kill();
+      };
     },
-    { scope: rootRef }
+    { scope: rootRef, dependencies: [scrollReady] }
   );
 
   return (
@@ -87,7 +122,7 @@ export function PolarRetroCountdown({ className }: PolarRetroCountdownProps) {
       aria-label="One million confirmed direct bookings"
     >
       <div className="polar-sliding-million">
-        <MillionDisplay value={value} />
+        <MillionDisplay value={display} />
       </div>
     </div>
   );

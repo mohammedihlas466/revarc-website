@@ -1,3 +1,4 @@
+import { CtaSection } from "@/components/home/CtaSection";
 import { DiagnosisSection } from "@/components/home/DiagnosisSection";
 import { HeroSection } from "@/components/home/HeroSection";
 import { OperatingRecordSection } from "@/components/home/OperatingRecordSection";
@@ -18,6 +19,7 @@ export default function Home() {
         <SectionDivider />
         <OperatingRecordSection />
         <SectionDivider />
+        <CtaSection />
       </main>
     </>
   );

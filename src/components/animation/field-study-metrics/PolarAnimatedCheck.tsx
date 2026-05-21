@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
@@ -10,11 +11,12 @@ type PolarAnimatedCheckProps = {
 
 export function PolarAnimatedCheck({ className }: PolarAnimatedCheckProps) {
   const rootRef = useRef<SVGSVGElement>(null);
+  const scrollReady = useScrollAnimationReady();
 
   useGSAP(
     () => {
       const svg = rootRef.current;
-      if (!svg) return;
+      if (!svg || !scrollReady) return;
 
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
@@ -69,7 +71,7 @@ export function PolarAnimatedCheck({ className }: PolarAnimatedCheckProps) {
         "-=0.9"
       );
     },
-    { scope: rootRef }
+    { scope: rootRef, dependencies: [scrollReady] }
   );
 
   return (

@@ -12,9 +12,9 @@ import useMeasure from "react-use-measure";
 
 const TRANSITION = {
   type: "spring" as const,
-  stiffness: 110,
-  damping: 28,
-  mass: 1.1,
+  stiffness: 200,
+  damping: 32,
+  mass: 0.55,
 };
 
 function Digit({ value, place }: { value: number; place: number }) {

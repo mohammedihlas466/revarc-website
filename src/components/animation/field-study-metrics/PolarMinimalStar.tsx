@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
@@ -10,11 +11,12 @@ type PolarMinimalStarProps = {
 
 export function PolarMinimalStar({ className }: PolarMinimalStarProps) {
   const rootRef = useRef<SVGSVGElement>(null);
+  const scrollReady = useScrollAnimationReady();
 
   useGSAP(
     () => {
       const svg = rootRef.current;
-      if (!svg) return;
+      if (!svg || !scrollReady) return;
 
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
@@ -49,7 +51,7 @@ export function PolarMinimalStar({ className }: PolarMinimalStarProps) {
         },
       });
     },
-    { scope: rootRef }
+    { scope: rootRef, dependencies: [scrollReady] }
   );
 
   return (

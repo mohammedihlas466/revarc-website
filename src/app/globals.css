@@ -2375,10 +2375,206 @@ main {
 
   .cta-primary:hover,
   .cta-ghost:hover,
+  .cta-btn-border-glow:hover,
   .diagnosis-panel:hover,
   .bento-card:hover,
   .bento-border-glow:hover .bento-card,
   .stat-bar:hover {
     transform: none;
+  }
+
+
+}
+
+/* ── CTA Section (PAGE-01 §E) ── */
+.cta-section {
+  position: relative;
+  width: 100%;
+  padding: 120px var(--section-pad-x);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cta-section__glow {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: min(780px, 88vw);
+  height: min(360px, 50vh);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 75% 50% at 50% 50%,
+    rgba(90, 159, 200, 0.1) 0%,
+    transparent 68%
+  );
+}
+
+.cta-section__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(28px, 4vw, 40px);
+}
+
+.cta-section__eyebrow-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.cta-section__card-wrap {
+  width: min(100%, 920px);
+}
+
+.cta-card-border-glow.border-glow-card {
+  width: 100%;
+  min-height: 0;
+  height: auto;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.cta-card-border-glow .border-glow-inner {
+  min-height: 0;
+  height: auto;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.cta-section__card-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(20px, 2.8vw, 28px);
+  padding: clamp(40px, 5vw, 56px) clamp(32px, 5vw, 64px);
+  background: linear-gradient(
+    165deg,
+    rgba(17, 17, 19, 0.94) 0%,
+    rgba(10, 10, 11, 0.98) 100%
+  );
+  border-radius: 24px;
+}
+
+.cta-section__headline {
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  text-wrap: balance;
+}
+
+.cta-section__headline-line {
+  display: block;
+  font-size: clamp(40px, 5.2vw, 64px);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.cta-section__headline-line--primary {
+  white-space: nowrap;
+}
+
+.cta-section__headline-line--silver {
+  font-style: italic;
+  color: var(--silver);
+  margin-top: 0.08em;
+}
+
+.cta-section__subcopy {
+  margin: 0;
+  max-width: 520px;
+  font-size: clamp(14px, 1.6vw, 16px);
+  font-weight: 300;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  color: var(--text-secondary);
+}
+
+/* CTA — Border Glow button (same beam as Three channels bentos) */
+.cta-btn-border-glow.border-glow-card {
+  display: inline-flex;
+  width: auto;
+  min-height: 0;
+  height: auto;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.cta-btn-border-glow .border-glow-inner {
+  min-height: 0;
+  height: auto;
+  overflow: hidden;
+  border-radius: 100px;
+}
+
+.cta-btn-border-glow .cta-primary {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+@media (max-width: 1023px) {
+  .cta-section {
+    padding: 96px var(--section-pad-x);
+  }
+
+  .cta-section__headline {
+    max-width: none;
+  }
+
+  .cta-section__card-panel {
+    padding: 36px 28px;
+  }
+
+  .cta-section__headline-line--primary {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 767px) {
+  .cta-section {
+    padding: 72px var(--section-pad-x);
+  }
+
+  .cta-section__card-wrap {
+    width: 100%;
+  }
+
+  .cta-section__headline-line {
+    font-size: clamp(32px, 8vw, 44px);
+    line-height: 1.06;
+  }
+
+  .cta-section__headline-line--primary {
+    white-space: normal;
+  }
+
+  .cta-section__subcopy {
+    max-width: none;
+    font-size: 15px;
+  }
+
+  .cta-section__card-panel {
+    gap: 18px;
+    padding: 32px 20px;
+  }
+
+  .cta-btn-border-glow {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .cta-btn-border-glow .cta-primary {
+    width: 100%;
   }
 }

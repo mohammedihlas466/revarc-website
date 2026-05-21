@@ -5,6 +5,7 @@ import { FieldStudyPolarMetricCard } from "@/components/animation/field-study-me
 import { PolarAnimatedCheck } from "@/components/animation/field-study-metrics/PolarAnimatedCheck";
 import { PolarMinimalStar } from "@/components/animation/field-study-metrics/PolarMinimalStar";
 import { PolarRetroCountdown } from "@/components/animation/field-study-metrics/PolarRetroCountdown";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 const METRICS = [
@@ -30,11 +31,12 @@ const METRICS = [
 
 export function FieldStudyMetricsPolar() {
   const gridRef = useRef<HTMLDivElement>(null);
+  const scrollReady = useScrollAnimationReady();
 
   useGSAP(
     () => {
       const grid = gridRef.current;
-      if (!grid) return;
+      if (!grid || !scrollReady) return;
 
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
@@ -62,7 +64,7 @@ export function FieldStudyMetricsPolar() {
         },
       });
     },
-    { scope: gridRef }
+    { scope: gridRef, dependencies: [scrollReady] }
   );
 
   return (

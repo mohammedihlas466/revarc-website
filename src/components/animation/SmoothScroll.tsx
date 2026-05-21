@@ -3,33 +3,18 @@
 import { ReactLenis, useLenis } from "lenis/react";
 import { useEffect } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import {
+  resetScrollAnimationReady,
+  scheduleScrollTriggerRefreshes,
+  syncScrollTriggersWithLenis,
+} from "@/lib/scroll-animation";
+import "lenis/dist/lenis.css";
 
 function LenisScrollTriggerSync() {
   const lenis = useLenis();
 
   useEffect(() => {
     if (!lenis) return;
-
-    const root = document.documentElement;
-
-    ScrollTrigger.scrollerProxy(root, {
-      scrollTop(value) {
-        if (typeof value === "number") {
-          lenis.scrollTo(value, { immediate: true });
-        }
-        return lenis.scroll;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-    });
-
-    ScrollTrigger.defaults({ scroller: root });
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -44,17 +29,18 @@ function LenisScrollTriggerSync() {
     gsap.ticker.add(onTick);
     gsap.ticker.lagSmoothing(0);
 
-    const refresh = () => ScrollTrigger.refresh();
-    refresh();
-    requestAnimationFrame(refresh);
+    syncScrollTriggersWithLenis(lenis);
+    const cancelScheduledRefreshes = scheduleScrollTriggerRefreshes(lenis);
 
     return () => {
+      cancelScheduledRefreshes();
       lenis.off("scroll", ScrollTrigger.update);
       ScrollTrigger.removeEventListener("refresh", onRefresh);
       gsap.ticker.remove(onTick);
-      ScrollTrigger.scrollerProxy(root, {});
+      ScrollTrigger.scrollerProxy(document.documentElement, {});
       ScrollTrigger.clearScrollMemory();
       ScrollTrigger.defaults({ scroller: window });
+      resetScrollAnimationReady();
     };
   }, [lenis]);
 

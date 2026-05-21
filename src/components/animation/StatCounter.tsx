@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { fontDisplay, fontMono } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -58,11 +59,12 @@ function formatAnimatedValue(
 
 export function StatCounter({ stats, className }: StatCounterProps) {
   const barRef = useRef<HTMLDivElement>(null);
+  const scrollReady = useScrollAnimationReady();
 
   useGSAP(
     () => {
       const bar = barRef.current;
-      if (!bar) return;
+      if (!bar || !scrollReady) return;
 
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
@@ -113,7 +115,7 @@ export function StatCounter({ stats, className }: StatCounterProps) {
         });
       });
     },
-    { scope: barRef }
+    { scope: barRef, dependencies: [scrollReady] }
   );
 
   return (

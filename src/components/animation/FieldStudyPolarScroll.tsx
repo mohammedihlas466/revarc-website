@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { fontDisplay, fontMono } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -49,12 +50,13 @@ export function FieldStudyPolarScroll({
 }: FieldStudyPolarScrollProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
+  const scrollReady = useScrollAnimationReady();
 
   useGSAP(
     () => {
       const section = sectionRef.current;
       const thumb = thumbRef.current;
-      if (!section) return;
+      if (!section || !scrollReady) return;
 
       const words = gsap.utils.toArray<HTMLElement>(
         section.querySelectorAll(".field-study-polar-word")
@@ -112,7 +114,7 @@ export function FieldStudyPolarScroll({
         st.kill();
       };
     },
-    { scope: sectionRef, dependencies: [beats] }
+    { scope: sectionRef, dependencies: [beats, scrollReady] }
   );
 
   return (

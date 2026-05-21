@@ -25,6 +25,8 @@
     "@react-bits": "https://reactbits.dev/r/{name}.json",
     "@scrollxui": "https://www.scrollxui.dev/registry/{name}.json",
     "@spell": "https://spell.sh/r/{name}.json",
-    "@magicui": "https://magicui.design/r/{name}"
+    "@magicui": "https://magicui.design/r/{name}",
+    "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
+    "@componentry": "https://componentry.fun/r/{name}.json"
   }
 }
