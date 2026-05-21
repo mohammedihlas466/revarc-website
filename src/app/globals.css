@@ -1628,6 +1628,9 @@ main {
   z-index: 2;
   padding-top: calc(var(--section-pad-y) + 16px);
   padding-bottom: calc(var(--section-pad-y) + 32px);
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .operating-record-header {
@@ -1768,7 +1771,135 @@ main {
 .field-study-beats {
   display: flex;
   flex-direction: column;
-  gap: clamp(80px, 12vh, 160px);
+  gap: clamp(48px, 8vh, 96px);
+}
+
+/* Polar.sh-style scroll narrative — single rail for 02 + 03 */
+.field-study-polar-group {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.field-study-polar-group__pin {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: clamp(40px, 8vh, 96px) 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.field-study-polar-group__layout {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.field-study-polar-rail {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  min-width: 20px;
+  min-height: min(68vh, 560px);
+}
+
+.field-study-polar-rail__track {
+  position: relative;
+  width: 1px;
+  height: 100%;
+  min-height: 240px;
+  background: var(--border-whisper);
+}
+
+.field-study-polar-rail__thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: clamp(56px, 10vh, 96px);
+  background: var(--text-primary);
+  opacity: 0.5;
+  border-radius: 1px;
+  will-change: top, opacity;
+}
+
+.field-study-polar-group__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+}
+
+.field-study-polar-beat {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.field-study-polar-beat--spaced {
+  margin-top: clamp(40px, 8vh, 80px);
+  padding-top: clamp(40px, 8vh, 80px);
+  border-top: 1px solid var(--border-whisper);
+}
+
+.field-study-polar-index {
+  margin: 0 0 clamp(16px, 2.5vh, 28px);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--label);
+  text-align: left;
+}
+
+.field-study-polar-block {
+  margin: 0 0 clamp(12px, 2vh, 20px);
+  font-weight: 300;
+  text-align: left;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+.field-study-polar-block:last-child {
+  margin-bottom: 0;
+}
+
+/* Unified Polar line — Cormorant display, primary white, one scale */
+.field-study-polar-block--display,
+.field-study-polar-block--body {
+  font-size: clamp(28px, 4.2vw, 52px);
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.field-study-polar-word {
+  display: inline;
+  opacity: 0.12;
+  white-space: normal;
+  color: var(--text-primary);
+  will-change: opacity;
+}
+
+.field-study-polar-word--display {
+  color: inherit;
 }
 
 .field-study-beat {
@@ -1957,7 +2088,32 @@ main {
   }
 
   .field-study-beats {
-    gap: 56px;
+    gap: 40px;
+  }
+
+  .field-study-polar-group__layout {
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .field-study-polar-group__pin {
+    padding: 32px 0;
+  }
+
+  .field-study-polar-rail {
+    min-height: 48vh;
+  }
+
+  .field-study-polar-block--display,
+  .field-study-polar-block--body {
+    font-size: clamp(24px, 6.8vw, 34px);
+    line-height: 1.18;
+    color: var(--text-primary);
+  }
+
+  .field-study-polar-beat--spaced {
+    margin-top: 32px;
+    padding-top: 32px;
   }
 
   .revarc-metallic-orb {
@@ -2007,6 +2163,22 @@ main {
     opacity: 1;
     filter: none;
     transform: none;
+  }
+
+  .field-study-polar-group__pin {
+    position: relative;
+    min-height: auto;
+    padding: 40px 0;
+  }
+
+  .field-study-polar-word {
+    opacity: 1;
+  }
+
+  .field-study-polar-rail__thumb {
+    opacity: 1;
+    top: 0;
+    height: 100%;
   }
 
   .status-pill-dot {

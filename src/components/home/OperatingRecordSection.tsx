@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef } from "react";
+import { FieldStudyPolarScroll } from "@/components/animation/FieldStudyPolarScroll";
 import { ScrollSpotlightText } from "@/components/animation/ScrollSpotlightText";
 import { CardVisual } from "@/components/backgrounds/CardVisual";
 import { RevArcMagicDottedMap } from "@/components/backgrounds/RevArcMagicDottedMap";
@@ -19,29 +20,19 @@ import { cn } from "@/lib/utils";
 const PROLOGUE =
   "A boutique villa on the southern coast of Sri Lanka — five double rooms, three triple rooms, performing at a fraction of its potential.";
 
-const BEATS = [
-  {
-    id: "before",
-    index: "01 — BEFORE",
-    body: "Broken OTA listings. No direct acquisition channel. Unmanaged reputation. Zero off-season programming.",
-    variant: "display" as const,
-    align: "right" as const,
-  },
-  {
-    id: "rebuild",
-    index: "02 — REBUILD",
-    lead: "RevArc rebuilt three revenue channels in parallel and operated all three in concert for over two years.",
-    body: "The direct booking engine generated hundreds of confirmed bookings through Meta Ads and WhatsApp at $0.47 per conversation. The OTA channel was rehabilitated to Booking.com Preferred Partner status, reaching seven international markets. Two productised revenue packages — a Valentine's Day experience and a Day Out package — were architected, launched, and both generated confirmed bookings and real revenue.",
-    align: "left" as const,
-  },
-  {
-    id: "engine",
-    index: "03 — ENGINE",
-    body: "The result is a working revenue engine: owner-controlled, year-round, and re-engineerable.",
-    variant: "display" as const,
-    align: "right" as const,
-  },
-] as const;
+const BEFORE_BEAT = {
+  index: "01 — BEFORE",
+  body: "Broken OTA listings. No direct acquisition channel. Unmanaged reputation. Zero off-season programming.",
+} as const;
+
+const REBUILD_LEAD =
+  "RevArc rebuilt three revenue channels in parallel and operated all three in concert for over two years.";
+
+const REBUILD_BODY =
+  "The direct booking engine generated hundreds of confirmed bookings through Meta Ads and WhatsApp at $0.47 per conversation. The OTA channel was rehabilitated to Booking.com Preferred Partner status, reaching seven international markets. Two productised revenue packages — a Valentine's Day experience and a Day Out package — were architected, launched, and both generated confirmed bookings and real revenue.";
+
+const ENGINE_BODY =
+  "The result is a working revenue engine: owner-controlled, year-round, and re-engineerable.";
 
 const CITATION =
   "All metrics sourced from Meta Ads Manager, Booking.com Partner Extranet, Agoda YCS Dashboard, and Google Business Profile. Named guest records available on request.";
@@ -74,39 +65,20 @@ const METRIC_BENTOS = [
 function FieldStudyBeatRow({
   index,
   body,
-  lead,
-  variant = "display",
   align,
   visualKind,
 }: {
   index: string;
   body: string;
-  lead?: string;
-  variant?: "display" | "body";
   align: "left" | "right";
-  visualKind: "before" | "rebuild" | "engine";
+  visualKind: "before";
 }) {
   const textCol = (
     <div className="field-study-beat-copy">
       <div className={cn("field-study-beat-index", fontMono.className)}>
         <RevArcWordsStagger text={index} stagger={0.12} speed={0.4} inView />
       </div>
-      {lead ? (
-        <>
-          <ScrollSpotlightText
-            text={lead}
-            variant="display"
-            className="field-study-beat-lead"
-          />
-          <ScrollSpotlightText
-            text={body}
-            variant="body"
-            className="field-study-beat-body"
-          />
-        </>
-      ) : (
-        <ScrollSpotlightText text={body} variant={variant} />
-      )}
+      <ScrollSpotlightText text={body} variant="display" />
     </div>
   );
 
@@ -242,17 +214,28 @@ export function OperatingRecordSection() {
           </div>
 
           <div className="field-study-beats">
-            {BEATS.map((beat) => (
-              <FieldStudyBeatRow
-                key={beat.id}
-                index={beat.index}
-                body={beat.body}
-                lead={"lead" in beat ? beat.lead : undefined}
-                variant={"variant" in beat ? beat.variant : "display"}
-                align={beat.align}
-                visualKind={beat.id}
-              />
-            ))}
+            <FieldStudyBeatRow
+              index={BEFORE_BEAT.index}
+              body={BEFORE_BEAT.body}
+              align="right"
+              visualKind="before"
+            />
+
+            <FieldStudyPolarScroll
+              beats={[
+                {
+                  index: "02 — REBUILD",
+                  segments: [
+                    { text: REBUILD_LEAD, variant: "display" },
+                    { text: REBUILD_BODY, variant: "display" },
+                  ],
+                },
+                {
+                  index: "03 — ENGINE",
+                  segments: [{ text: ENGINE_BODY, variant: "display" }],
+                },
+              ]}
+            />
           </div>
 
           <div className="field-study-closure">
