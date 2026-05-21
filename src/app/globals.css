@@ -3489,44 +3489,93 @@ main {
   display: block;
 }
 
-/* Real phones (touch): WebGL canvas often mis-sizes — full-bleed CSS atmosphere */
-@media (hover: none) and (pointer: coarse) {
-  .about-hero-darkveil-layer .revarc-darkveil {
-    display: none;
+/* Tablet + mobile: CSS atmosphere only (WebGL mis-sizes in iframes & phones) */
+.about-hero-section--css-atmosphere .about-hero-bg-stack {
+  background:
+    radial-gradient(
+      ellipse 180% 120% at 50% 12%,
+      rgba(56, 189, 248, 0.42) 0%,
+      rgba(56, 189, 248, 0.14) 40%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 140% 90% at 80% 85%,
+      rgba(15, 40, 72, 0.75) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 100% 70% at 10% 50%,
+      rgba(125, 211, 252, 0.12) 0%,
+      transparent 52%
+    ),
+    var(--void);
+}
+
+.about-hero-section--css-atmosphere .about-hero-veil-blue-tint {
+  opacity: 0.58;
+  mix-blend-mode: screen;
+}
+
+.about-hero-section--css-atmosphere .about-hero-veil-blue-screen {
+  opacity: 0.32;
+}
+
+.about-hero-section--css-atmosphere .about-hero-darkveil-layer::after {
+  opacity: 0.38;
+}
+
+@media (max-width: 1023px) {
+  .about-hero-section,
+  .about-hero-bg-stack,
+  .about-hero-darkveil-layer,
+  .about-hero-scrim,
+  .about-hero-veil-blue-tint,
+  .about-hero-veil-blue-screen {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0;
+    transform: none;
   }
 
-  .about-hero-bg-stack {
+  .about-hero-section .about-hero-bg-stack {
     background:
       radial-gradient(
-        ellipse 160% 110% at 50% 18%,
-        rgba(56, 189, 248, 0.38) 0%,
-        rgba(56, 189, 248, 0.12) 42%,
-        transparent 68%
+        ellipse 180% 120% at 50% 12%,
+        rgba(56, 189, 248, 0.42) 0%,
+        rgba(56, 189, 248, 0.14) 40%,
+        transparent 70%
       ),
       radial-gradient(
-        ellipse 120% 80% at 78% 82%,
-        rgba(15, 40, 72, 0.7) 0%,
-        transparent 55%
+        ellipse 140% 90% at 80% 85%,
+        rgba(15, 40, 72, 0.75) 0%,
+        transparent 58%
       ),
       radial-gradient(
-        ellipse 90% 60% at 12% 55%,
-        rgba(125, 211, 252, 0.1) 0%,
-        transparent 50%
+        ellipse 100% 70% at 10% 50%,
+        rgba(125, 211, 252, 0.12) 0%,
+        transparent 52%
       ),
       var(--void);
   }
 
-  .about-hero-veil-blue-tint {
-    opacity: 0.55;
+  .about-hero-section .about-hero-veil-blue-tint {
+    opacity: 0.58;
     mix-blend-mode: screen;
   }
 
-  .about-hero-veil-blue-screen {
-    opacity: 0.28;
+  .about-hero-section .about-hero-veil-blue-screen {
+    opacity: 0.32;
   }
 
-  .about-hero-darkveil-layer::after {
-    opacity: 0.35;
+  .about-hero-section .about-hero-darkveil-layer::after {
+    opacity: 0.38;
+  }
+
+  .about-hero-darkveil-layer .revarc-darkveil {
+    display: none;
   }
 }
 
