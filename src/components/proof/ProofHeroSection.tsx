@@ -116,6 +116,7 @@ export function ProofHeroSection() {
         <div className="proof-hero-prism-layer">
           <RevArcProofPrism />
         </div>
+        <div className="proof-hero-prism-deep-wash" />
         <div className="proof-hero-prism-blue-tint" />
         <div className="proof-hero-prism-blue-screen" />
         <div className="proof-hero-scrim" />

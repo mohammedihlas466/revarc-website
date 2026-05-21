@@ -14,6 +14,10 @@ export const CANVAS_TOKENS = {
   obsidian: "#0a0a0b",
   accent: "#7dd3fc",
   accentBright: "#38bdf8",
-  /** Prism hueShift radians — locks spectrum to RevArc cyan / deep atmosphere */
-  prismHueShift: 0.38,
+  /** Prism Proof hero — hue radians toward RevArc cyan (suppresses default green/yellow) */
+  prismHueShift: 2.35,
+  prismColorFrequency: 0.68,
+  prismGlow: 0.84,
+  prismBloom: 0.88,
+  prismNoise: 0.22,
 } as const;
