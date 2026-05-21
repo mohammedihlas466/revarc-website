@@ -5,6 +5,7 @@ import { StatCounter } from "@/components/animation/StatCounter";
 import { SectionHeader } from "@/components/layout/SectionHeader";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { MiniMetricCard } from "@/components/ui/MiniMetricCard";
+import { RevArcBorderGlow } from "@/components/ui/RevArcBorderGlow";
 import { SourceCitation } from "@/components/ui/SourceCitation";
 import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
@@ -187,21 +188,28 @@ export function ProofPillarDirectBookingSection() {
 
           <div className="proof-pillar01-metrics bento-card-slot bento-card-slot--5">
             {MINI_METRICS.map((metric) => (
-              <MiniMetricCard
+              <RevArcBorderGlow
                 key={metric.label}
-                label={metric.label}
-                value={metric.value}
-                sub={metric.sub}
-                className="proof-pillar01-metric"
-              />
+                className="mini-metric-border-glow"
+                borderRadius={16}
+              >
+                <MiniMetricCard
+                  label={metric.label}
+                  value={metric.value}
+                  sub={metric.sub}
+                  className="proof-pillar01-metric"
+                />
+              </RevArcBorderGlow>
             ))}
           </div>
         </div>
 
-        <StatCounter
-          stats={STAT_ITEMS}
-          className="proof-pillar01-stat-bar"
-        />
+        <RevArcBorderGlow className="proof-pillar01-stat-bar-glow">
+          <StatCounter
+            stats={STAT_ITEMS}
+            className="proof-pillar01-stat-bar"
+          />
+        </RevArcBorderGlow>
       </div>
 
       <SourceCitation className="proof-pillar01-citation">{CITATION}</SourceCitation>

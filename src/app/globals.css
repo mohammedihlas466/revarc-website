@@ -4390,6 +4390,53 @@ main {
   min-height: auto;
 }
 
+.mini-metric-border-glow.border-glow-card {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 16px;
+}
+
+.bento-border-glow.mini-metric-border-glow {
+  min-height: 0;
+}
+
+.mini-metric-border-glow .border-glow-inner {
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.bento-border-glow.mini-metric-border-glow .mini-metric-card {
+  border-color: transparent;
+  height: 100%;
+}
+
+.proof-pillar01-stat-bar-glow.border-glow-card {
+  width: 100%;
+  min-height: 120px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.bento-border-glow.proof-pillar01-stat-bar-glow {
+  min-height: 120px;
+}
+
+.proof-pillar01-stat-bar-glow .border-glow-inner {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.bento-border-glow.proof-pillar01-stat-bar-glow .stat-bar {
+  border-color: transparent;
+  min-height: 120px;
+}
+
 .proof-pillar01-metrics .mini-metric-card {
   flex: 1;
 }
@@ -4719,6 +4766,11 @@ main {
   .proof-pillar01-metrics {
     flex-direction: row;
     grid-column: span 12;
+  }
+
+  .proof-pillar01-metrics .mini-metric-border-glow {
+    flex: 1 1 0;
+    min-width: 0;
   }
 
   .proof-pillar01-metrics .mini-metric-card {
