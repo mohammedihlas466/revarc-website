@@ -21,8 +21,8 @@ export default function ProofPage() {
   return (
     <div className="proof-page-root">
       <NavBar />
+      <ProofHeroSection />
       <main className="proof-page">
-        <ProofHeroSection />
         <SectionDivider />
         <ProofPropertySection />
         <SectionDivider />

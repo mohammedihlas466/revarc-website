@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { RevArcProofPrism } from "@/components/backgrounds/RevArcProofPrism";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { SourceCitation } from "@/components/ui/SourceCitation";
 import { gsap, useGSAP } from "@/lib/gsap";
@@ -108,41 +109,56 @@ export function ProofHeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="proof-hero-section standard-section"
+      className="proof-hero-section"
       aria-labelledby="proof-hero-heading"
     >
-      <StatusPill className="proof-hero__eyebrow">{EYEBROW}</StatusPill>
-
-      <h1
-        id="proof-hero-heading"
-        className={cn("proof-hero__headline", fontDisplay.className)}
-      >
-        <span className="proof-hero__headline-line proof-hero__headline-line--primary">
-          {HEADLINE_LINE_1}
-        </span>
-        <span className="proof-hero__headline-line proof-hero__headline-line--silver">
-          {HEADLINE_LINE_2}
-        </span>
-      </h1>
-
-      <p className={cn("proof-hero__subtitle", fontUi.className)}>{SUBTITLE}</p>
-
-      <div className="proof-hero-stats" role="list" aria-label="Field study metrics">
-        {HERO_STATS.map((stat) => (
-          <div key={stat.label} className="proof-hero-stat" role="listitem">
-            <span
-              className={cn("proof-hero-stat-value", fontDisplay.className)}
-            >
-              {stat.value}
-            </span>
-            <span className={cn("proof-hero-stat-label", fontMono.className)}>
-              {stat.label}
-            </span>
-          </div>
-        ))}
+      <div className="proof-hero-bg-stack" aria-hidden="true">
+        <div className="proof-hero-prism-layer">
+          <RevArcProofPrism />
+        </div>
+        <div className="proof-hero-prism-blue-tint" />
+        <div className="proof-hero-prism-blue-screen" />
+        <div className="proof-hero-scrim" />
       </div>
 
-      <SourceCitation className="proof-hero__citation">{CITATION}</SourceCitation>
+      <div className="proof-hero-section__inner standard-section">
+        <StatusPill className="proof-hero__eyebrow">{EYEBROW}</StatusPill>
+
+        <h1
+          id="proof-hero-heading"
+          className={cn("proof-hero__headline", fontDisplay.className)}
+        >
+          <span className="proof-hero__headline-line proof-hero__headline-line--primary">
+            {HEADLINE_LINE_1}
+          </span>
+          <span className="proof-hero__headline-line proof-hero__headline-line--silver">
+            {HEADLINE_LINE_2}
+          </span>
+        </h1>
+
+        <p className={cn("proof-hero__subtitle", fontUi.className)}>{SUBTITLE}</p>
+
+        <div
+          className="proof-hero-stats"
+          role="list"
+          aria-label="Field study metrics"
+        >
+          {HERO_STATS.map((stat) => (
+            <div key={stat.label} className="proof-hero-stat" role="listitem">
+              <span
+                className={cn("proof-hero-stat-value", fontDisplay.className)}
+              >
+                {stat.value}
+              </span>
+              <span className={cn("proof-hero-stat-label", fontMono.className)}>
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <SourceCitation className="proof-hero__citation">{CITATION}</SourceCitation>
+      </div>
     </section>
   );
 }
