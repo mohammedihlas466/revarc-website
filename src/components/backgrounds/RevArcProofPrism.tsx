@@ -60,10 +60,10 @@ export function RevArcProofPrism({ className }: RevArcProofPrismProps) {
         glow={1.05}
         bloom={1.05}
         noise={0.28}
-        scale={2.85}
+        scale={2.05}
         timeScale={config.timeScale}
         colorFrequency={1.05}
-        offset={{ x: 220, y: 32 }}
+        offset={{ x: 0, y: 28 }}
         suspendWhenOffscreen={false}
         transparent
       />
