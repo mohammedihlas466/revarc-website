@@ -8,9 +8,9 @@ import { SectionDivider } from "@/components/layout/SectionDivider";
 
 export default function Home() {
   return (
-    <>
+    <div className="home-page-root">
       <NavBar />
-      <main>
+      <main className="home-page">
         <HeroSection />
         <SectionDivider />
         <DiagnosisSection />
@@ -21,6 +21,6 @@ export default function Home() {
         <SectionDivider />
         <CtaSection />
       </main>
-    </>
+    </div>
   );
 }

@@ -128,6 +128,8 @@
   --text-primary: #f0f0ee;
   /* Brighter secondary — WCAG AA body copy on --void (was #4a4a52) */
   --text-secondary: #a8a8b4;
+  --text-body: #e4e4ec;
+  --text-ui: #d2d2dc;
   --text-ghost: #1a1a1e;
   --label: #606068;
 
@@ -154,9 +156,11 @@
 
   /* ── LAYOUT ── */
   --max-width: 1280px;
-  --section-pad-x: 48px;
-  --section-pad-y: 160px;
-  --grid-gap: 16px;
+  --section-pad-x: clamp(20px, 4vw, 56px);
+  --section-pad-y: clamp(96px, 14vh, 184px);
+  --section-header-rhythm: clamp(72px, 8vh, 104px);
+  --section-divider-my: clamp(12px, 2vh, 28px);
+  --grid-gap: 20px;
   --card-padding: 36px;
   --card-radius: 20px;
   --card-radius-inner: 12px;
@@ -190,7 +194,7 @@ html {
   scroll-behavior: smooth;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -201,14 +205,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   min-height: 100vh;
   min-height: 100dvh;
+  text-rendering: optimizeLegibility;
 }
 
 main {
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -615,6 +624,8 @@ main {
 
 .hero-word-inner {
   display: inline-block;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .hero-subcopy {
@@ -686,10 +697,12 @@ main {
 
 @media (max-width: 767px) {
   :root {
-    --section-pad-x: 20px;
-    --section-pad-y: 60px;
+    --section-pad-x: clamp(16px, 5vw, 24px);
+    --section-pad-y: clamp(72px, 14vh, 96px);
+    --section-header-rhythm: clamp(48px, 8vh, 64px);
+    --section-divider-my: clamp(8px, 1.5vh, 16px);
     --card-padding: 24px;
-    --grid-gap: 12px;
+    --grid-gap: 16px;
   }
 
   .revarc-nav {
@@ -765,8 +778,9 @@ main {
 .section-divider {
   width: 100%;
   max-width: var(--max-width);
-  margin: 0 auto;
+  margin: var(--section-divider-my) auto;
   height: 1px;
+  flex-shrink: 0;
   background: linear-gradient(
     90deg,
     transparent,
@@ -791,14 +805,15 @@ main {
 .section-header {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-bottom: 72px;
+  gap: clamp(20px, 2.5vh, 28px);
+  margin-bottom: var(--section-header-rhythm);
 }
 
 .section-eyebrow {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .section-eyebrow-text {
@@ -826,7 +841,7 @@ main {
 
 .section-title-line {
   font-size: clamp(52px, 6vw, 84px);
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: -0.01em;
 }
 
@@ -844,6 +859,8 @@ main {
   overflow: hidden;
   vertical-align: top;
   margin-right: 0.22em;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
 }
 
 .section-title-word:last-child {
@@ -852,6 +869,8 @@ main {
 
 .section-title-word-inner {
   display: inline-block;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 /* ── Diagnosis section (Option A — editorial split + proof rail) ── */
@@ -884,7 +903,7 @@ main {
 }
 
 .diagnosis-header {
-  margin-bottom: 56px;
+  margin-bottom: clamp(56px, 7vh, 80px);
 }
 
 .diagnosis-layout {
@@ -1087,10 +1106,6 @@ main {
 }
 
 @media (max-width: 1023px) {
-  .standard-section {
-    padding: 80px var(--section-pad-x);
-  }
-
   .diagnosis-layout {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1129,13 +1144,9 @@ main {
 }
 
 @media (max-width: 767px) {
-  .standard-section {
-    padding: 60px var(--section-pad-x);
-  }
-
   .section-header,
   .diagnosis-header {
-    margin-bottom: 40px;
+    margin-bottom: var(--section-header-rhythm);
   }
 
   .diagnosis-rail-list {
@@ -1179,9 +1190,10 @@ main {
 /* ── Section subtitle ── */
 .section-subtitle {
   max-width: 640px;
-  font-size: 16px;
+  margin-top: clamp(8px, 1.5vh, 16px);
+  font-size: clamp(15px, 1.6vw, 16px);
   font-weight: 300;
-  line-height: 1.8;
+  line-height: 1.85;
   letter-spacing: 0.02em;
   color: var(--text-secondary);
 }
@@ -1250,9 +1262,14 @@ main {
   border-radius: var(--card-radius);
   overflow: hidden;
   cursor: default;
-  transition: all var(--duration-medium) var(--ease-out-expo);
+  transition:
+    transform var(--duration-medium) var(--ease-out-expo),
+    border-color var(--duration-medium) var(--ease-smooth),
+    box-shadow var(--duration-medium) var(--ease-out-expo);
   min-height: 340px;
   height: 100%;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .bento-border-glow .bento-card {
@@ -1335,7 +1352,7 @@ main {
   color: var(--text-ghost);
   line-height: 1;
   position: absolute;
-  bottom: -8px;
+  bottom: 4px;
   right: 24px;
   pointer-events: none;
   user-select: none;
@@ -1544,7 +1561,7 @@ main {
 
 /* ── System section ── */
 .system-header {
-  margin-bottom: 56px;
+  margin-bottom: clamp(56px, 7vh, 80px);
 }
 
 .system-card-a .bento-card-content {
@@ -2417,7 +2434,7 @@ main {
 .cta-section {
   position: relative;
   width: 100%;
-  padding: 120px var(--section-pad-x);
+  padding: clamp(96px, 14vh, 140px) var(--section-pad-x);
   overflow: hidden;
   isolation: isolate;
 }
@@ -3428,13 +3445,13 @@ main {
 .about-page-root {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .about-page {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .about-page-root + .site-footer-zone .site-footer-stage {
@@ -4108,7 +4125,7 @@ main {
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .proof-page {
@@ -4915,8 +4932,8 @@ main {
 
 @media (min-width: 768px) and (max-width: 1023px) {
   :root {
-    --section-pad-x: 24px;
-    --section-pad-y: 80px;
+    --section-pad-x: clamp(24px, 4vw, 32px);
+    --section-pad-y: clamp(88px, 12vh, 112px);
   }
 
   .proof-pillar01-metrics {
@@ -5131,9 +5148,9 @@ main {
 
 @media (min-width: 1024px) and (max-width: 1279px) {
   :root {
-    --section-pad-x: 36px;
-    --section-pad-y: 120px;
-    --card-padding: 28px;
+    --section-pad-x: clamp(32px, 3.5vw, 44px);
+    --section-pad-y: clamp(120px, 13vh, 160px);
+    --card-padding: 32px;
   }
 }
 
@@ -5141,13 +5158,13 @@ main {
 .how-we-work-page-root {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .how-we-work-page {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .how-we-work-page-root + .site-footer-zone .site-footer-stage {
@@ -5594,14 +5611,6 @@ main {
 
 /* Responsive — mobile */
 @media (max-width: 767px) {
-  .how-we-work-hero-section,
-  .how-we-work-page .standard-section {
-    padding-top: 60px;
-    padding-bottom: 60px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
   .how-we-work-hero-section {
     padding-top: calc(var(--nav-height) + var(--nav-top-offset) + 48px);
   }
@@ -5693,7 +5702,102 @@ main {
 
 @media (max-width: 1023px) {
   .how-cta-section {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: clamp(80px, 12vh, 96px);
+    padding-bottom: clamp(80px, 12vh, 96px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SITE-WIDE POLISH — unified shells, ultra-wide, performance
+   ═══════════════════════════════════════════════════════════ */
+
+.home-page-root,
+.about-page-root,
+.contact-page-root,
+.proof-page-root,
+.how-we-work-page-root {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.home-page,
+.about-page,
+.contact-page,
+.proof-page,
+.how-we-work-page {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.home-page-root + .site-footer-zone .site-footer-stage,
+.contact-page-root + .site-footer-zone .site-footer-stage {
+  padding-top: clamp(48px, 8vh, 72px);
+}
+
+.hero-word {
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.card-body {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.page-atmosphere {
+  contain: strict;
+  will-change: auto;
+}
+
+.proof-hero-section,
+.proof-evidence-section {
+  overflow-x: clip;
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --section-pad-x: clamp(56px, 4vw, 80px);
+    --section-pad-y: clamp(160px, 16vh, 220px);
+    --card-padding: 40px;
+  }
+
+  .standard-section,
+  .cta-section__inner,
+  .site-footer {
+    max-width: min(var(--max-width), calc(100% - (var(--section-pad-x) * 2)));
+  }
+}
+
+@media (max-width: 374px) {
+  :root {
+    --section-pad-x: 16px;
+    --grid-gap: 12px;
+  }
+
+  .section-title-line {
+    font-size: clamp(40px, 11vw, 52px);
+  }
+
+  .site-footer-stage__mark {
+    font-size: clamp(5rem, 22vw, 7rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bento-card,
+  .diagnosis-panel,
+  .metric-chip,
+  .service-tag {
+    transition-duration: 0.01ms;
+  }
+
+  .section-title-word-inner,
+  .scroll-spotlight-word,
+  .hero-word-inner {
+    will-change: auto;
   }
 }
