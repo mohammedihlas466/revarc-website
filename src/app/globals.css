@@ -4365,26 +4365,21 @@ main {
   min-height: 100%;
   background:
     radial-gradient(
-      ellipse 72% 42% at 18% 94%,
-      rgba(18, 14, 26, 0.42) 0%,
+      ellipse 78% 48% at 16% 92%,
+      rgba(24, 16, 40, 0.55) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 62% 38% at 84% 88%,
+      rgba(15, 36, 56, 0.48) 0%,
       transparent 58%
     ),
-    radial-gradient(
-      ellipse 58% 34% at 82% 90%,
-      rgba(12, 24, 36, 0.38) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse 90% 55% at 50% 48%,
-      rgba(2, 2, 2, 0.35) 0%,
-      transparent 68%
-    ),
     linear-gradient(
-      165deg,
+      158deg,
       var(--void) 0%,
-      var(--obsidian) 32%,
-      rgba(18, 14, 26, 0.92) 52%,
-      rgba(10, 10, 11, 0.98) 78%,
+      rgba(6, 16, 24, 0.96) 28%,
+      rgba(24, 16, 40, 0.72) 52%,
+      rgba(15, 36, 56, 0.58) 72%,
       var(--void) 100%
     );
 }
@@ -4396,8 +4391,8 @@ main {
   height: 100%;
   min-height: 100%;
   z-index: 1;
-  opacity: 0.26;
-  mix-blend-mode: normal;
+  opacity: 0.34;
+  mix-blend-mode: soft-light;
 }
 
 .proof-property-aurora-canvas .revarc-property-aurora,
@@ -4420,13 +4415,13 @@ main {
   z-index: 2;
   background:
     radial-gradient(
-      ellipse 68% 38% at 14% 92%,
-      rgba(48, 54, 64, 0.14) 0%,
+      ellipse 72% 42% at 12% 94%,
+      rgba(72, 88, 104, 0.16) 0%,
       transparent 58%
     ),
     radial-gradient(
-      ellipse 52% 30% at 86% 88%,
-      rgba(18, 14, 26, 0.28) 0%,
+      ellipse 58% 34% at 88% 90%,
+      rgba(24, 16, 40, 0.22) 0%,
       transparent 55%
     );
 }
@@ -4438,11 +4433,11 @@ main {
   background:
     linear-gradient(
       to bottom,
-      rgba(2, 2, 2, 0.72) 0%,
-      rgba(2, 2, 2, 0.48) 18%,
-      rgba(2, 2, 2, 0.38) 42%,
-      rgba(2, 2, 2, 0.42) 68%,
-      rgba(2, 2, 2, 0.62) 100%
+      rgba(2, 2, 2, 0.58) 0%,
+      rgba(2, 2, 2, 0.22) 20%,
+      rgba(2, 2, 2, 0.14) 45%,
+      rgba(2, 2, 2, 0.18) 72%,
+      rgba(2, 2, 2, 0.48) 100%
     );
 }
 
@@ -5037,20 +5032,20 @@ main {
   .proof-property-bg-stack {
     background:
       radial-gradient(
-        ellipse 72% 42% at 18% 94%,
-        rgba(18, 14, 26, 0.38) 0%,
-        transparent 58%
+        ellipse 78% 48% at 16% 92%,
+        rgba(24, 16, 40, 0.48) 0%,
+        transparent 62%
       ),
       radial-gradient(
-        ellipse 58% 34% at 82% 90%,
-        rgba(12, 24, 36, 0.32) 0%,
-        transparent 55%
+        ellipse 62% 38% at 84% 88%,
+        rgba(15, 36, 56, 0.42) 0%,
+        transparent 58%
       ),
       linear-gradient(
-        165deg,
+        158deg,
         var(--void) 0%,
-        var(--obsidian) 42%,
-        rgba(18, 14, 26, 0.88) 62%,
+        rgba(6, 16, 24, 0.96) 38%,
+        rgba(24, 16, 40, 0.62) 62%,
         var(--void) 100%
       );
   }

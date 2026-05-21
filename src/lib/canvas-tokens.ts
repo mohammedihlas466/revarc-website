@@ -24,8 +24,8 @@ export const CANVAS_TOKENS = {
   lightRaysColor: "#7dd3fc",
   lightRaysSpeed: 0.32,
   lightRaysMouseInfluence: 0.14,
-  /** Aurora — Property section (void blue → deep purple → dark silver gunmetal) */
-  auroraColorStops: ["#020204", "#120e1a", "#303640"] as const,
+  /** Aurora — Property section (deep blue → purple night → muted silver) */
+  auroraColorStops: ["#061018", "#181028", "#485868"] as const,
   auroraAmplitude: 0.95,
   auroraBlend: 0.6,
   auroraSpeed: 0.42,
