@@ -2884,3 +2884,422 @@ main {
     justify-content: center;
   }
 }
+
+/* ── Contact page (PAGE-05) ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.contact-page-root + .site-footer-zone .site-footer-stage {
+  padding-top: 60px;
+}
+
+.contact-hero-section {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 200px var(--section-pad-x) var(--section-pad-y);
+}
+
+.contact-hero-section__inner,
+.contact-call-section__inner,
+.contact-closing-section__inner {
+  width: 100%;
+}
+
+.contact-hero__row {
+  align-items: stretch;
+}
+
+.contact-hero__left {
+  grid-column: span 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+  min-height: 0;
+}
+
+.contact-hero__headline {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-weight: 300;
+}
+
+.contact-hero__headline-line {
+  display: block;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.contact-hero__headline-line--silver {
+  font-style: italic;
+  color: var(--silver);
+}
+
+.contact-hero__subtitle-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 420px;
+}
+
+.contact-hero__subtitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.contact-hero__details {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-whisper);
+  text-decoration: none;
+  transition: all var(--duration-fast) ease;
+}
+
+.contact-item--last {
+  border-bottom: none;
+}
+
+.contact-item:hover {
+  border-bottom-color: var(--border-active);
+}
+
+.contact-item--last:hover {
+  border-bottom-color: transparent;
+}
+
+.contact-item:hover .contact-value {
+  color: var(--text-primary);
+}
+
+.contact-icon-wrap {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--label);
+  transition: color var(--duration-fast) ease;
+}
+
+.contact-icon {
+  color: inherit;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.contact-item:hover .contact-icon-wrap {
+  color: var(--text-secondary);
+}
+
+.contact-label {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--label);
+  min-width: 72px;
+}
+
+.contact-value {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  transition: color var(--duration-fast) ease;
+}
+
+.contact-hero__calendar {
+  grid-column: span 7;
+  min-height: 0;
+}
+
+.calendar-bento-card {
+  min-height: 480px;
+}
+
+.calendar-bento-card.bento-card,
+.bento-border-glow:has(.calendar-bento-card) {
+  min-height: 480px;
+}
+
+.calendar-bento-card .bento-card-inner {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+}
+
+.calendar-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: inherit;
+  height: 100%;
+}
+
+.calendar-card-header {
+  padding: 20px var(--card-padding) 0;
+}
+
+.calendar-embed-container {
+  flex: 1;
+  padding: 16px;
+  min-height: 0;
+  pointer-events: auto;
+}
+
+.calendar-embed-container iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: none;
+  border-radius: var(--card-radius-inner);
+  background: var(--obsidian-raised);
+}
+
+.calendar-fallback {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  padding: 32px var(--card-padding) var(--card-padding);
+  min-height: 360px;
+}
+
+.calendar-fallback-eyebrow {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.calendar-fallback-headline {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.calendar-fallback-body {
+  margin: 0;
+  max-width: 280px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.calendar-fallback-cta {
+  margin-top: 8px;
+}
+
+.calendar-bento-card.bento-card:hover,
+.bento-border-glow:hover .calendar-bento-card.bento-card {
+  transform: none;
+  box-shadow:
+    0 0 0 1px rgba(192, 192, 192, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.contact-call-section {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 100px var(--section-pad-x);
+}
+
+.contact-call__row {
+  align-items: flex-start;
+}
+
+.call-item {
+  padding: 0 8px;
+  min-height: 0;
+}
+
+.call-item-number {
+  margin: 0 0 16px;
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--text-ghost);
+  line-height: 1;
+}
+
+.call-item-title {
+  margin: 0 0 10px;
+  font-size: clamp(20px, 2vw, 24px);
+  font-weight: 300;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.call-item-title-em {
+  font-style: italic;
+  color: var(--silver);
+}
+
+.call-item-body {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.contact-closing-section {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 100px var(--section-pad-x);
+}
+
+.contact-closing-section__inner {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.contact-closing__headline {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  font-weight: 300;
+}
+
+.contact-closing__line {
+  display: block;
+  font-size: clamp(28px, 3.5vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.contact-closing__line--silver {
+  font-style: italic;
+  color: var(--silver);
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .contact-hero-section {
+    padding-top: 160px;
+  }
+
+  .calendar-bento-card,
+  .calendar-bento-card.bento-card,
+  .bento-border-glow:has(.calendar-bento-card) {
+    min-height: 440px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .contact-hero__left,
+  .contact-hero__calendar {
+    grid-column: span 12;
+  }
+
+  .contact-hero-section {
+    padding-top: 120px;
+  }
+
+  .calendar-bento-card,
+  .calendar-bento-card.bento-card,
+  .bento-border-glow:has(.calendar-bento-card) {
+    min-height: 460px;
+  }
+
+  .contact-call-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .contact-closing-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .contact-hero__details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 24px;
+    max-width: none;
+  }
+
+  .contact-item {
+    flex: 1 1 calc(50% - 12px);
+    min-width: 200px;
+  }
+
+  .contact-item--last {
+    border-bottom: 1px solid var(--border-whisper);
+  }
+}
+
+@media (max-width: 767px) {
+  .contact-page-root + .site-footer-zone .site-footer-stage {
+    padding-top: 40px;
+  }
+
+  .contact-hero-section {
+    padding: 100px 20px 60px;
+  }
+
+  .contact-call-section,
+  .contact-closing-section {
+    padding: 60px 20px;
+  }
+
+  .contact-hero__details {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact-item {
+    flex: 1 1 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .contact-item--last {
+    border-bottom: none;
+  }
+
+  .calendar-bento-card,
+  .calendar-bento-card.bento-card,
+  .bento-border-glow:has(.calendar-bento-card) {
+    min-height: 400px;
+  }
+
+  .calendar-embed-container iframe {
+    min-height: 360px;
+  }
+}
