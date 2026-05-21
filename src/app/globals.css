@@ -5136,3 +5136,537 @@ main {
     --card-padding: 28px;
   }
 }
+
+/* ── How We Work page (PAGE-02) ── */
+.how-we-work-page-root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.how-we-work-page {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.how-we-work-page-root + .site-footer-zone .site-footer-stage {
+  padding-top: 60px;
+}
+
+.how-we-work-page .section-header .status-pill-dot,
+.how-we-work-page .how-cta-section__eyebrow--muted .status-pill-dot {
+  background: var(--silver);
+  opacity: 0.5;
+  box-shadow: none;
+  animation: none;
+}
+
+/* §A Hero */
+.how-we-work-hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+  padding-top: calc(var(--nav-height) + var(--nav-top-offset) + 80px);
+}
+
+.how-we-work-hero__headline {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-weight: 300;
+}
+
+.how-we-work-hero__headline-line {
+  display: block;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.how-we-work-hero__headline-line--silver {
+  font-style: italic;
+  color: var(--silver);
+}
+
+.how-we-work-hero__subtitle {
+  margin: 0;
+  max-width: 560px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  color: var(--text-secondary);
+}
+
+/* §B Pillars */
+.how-pillars-card.bento-card-slot,
+.how-pillars-card .bento-card {
+  min-height: 360px;
+}
+
+.how-pillars-below {
+  margin: 40px auto 0;
+  max-width: 640px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+/* §C Revenue Architecture */
+.how-ra-narrative-content,
+.how-ra-validated-content {
+  max-width: 100%;
+}
+
+.how-ra-narrative-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.how-ra-paragraph {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.how-ra-steps {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--card-padding);
+  background: var(--obsidian);
+  border: 1px solid var(--border-whisper);
+  border-radius: var(--card-radius);
+}
+
+.how-ra-validated.bento-card-slot,
+.how-ra-validated .bento-card {
+  min-height: auto;
+}
+
+.how-ra-validated-items {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.how-ra-validated-item {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.how-ra-validated-divider {
+  position: absolute;
+  left: -12px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--border-whisper);
+}
+
+.how-ra-validated-title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.how-ra-validated-detail {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.how-ra-citation {
+  margin-top: 16px;
+}
+
+/* §D Partnership — Year cards */
+.year-card .bento-card-inner {
+  padding: 0;
+}
+
+.year-card.bento-card-slot,
+.year-card .bento-card {
+  min-height: auto;
+}
+
+.year-card-inner {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 48px;
+  padding: var(--card-padding);
+  align-items: start;
+}
+
+.year-label {
+  font-size: clamp(64px, 5vw, 84px);
+  font-weight: 300;
+  color: var(--text-ghost);
+  line-height: 1;
+  transition: color var(--duration-medium) ease;
+}
+
+.year-card:hover .year-label {
+  color: #222226;
+}
+
+.year-title {
+  margin: 0 0 16px;
+  font-size: clamp(24px, 2.2vw, 32px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.year-title-italic {
+  font-style: italic;
+  color: var(--silver);
+}
+
+.year-body {
+  margin: 0 0 20px;
+  max-width: 520px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.year-milestones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.year-target {
+  margin: 16px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.how-partnership-years {
+  gap: var(--grid-gap);
+}
+
+.how-partnership-closing {
+  margin: 40px auto 0;
+  max-width: 560px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+/* §E Investment */
+.how-investment-roi-content,
+.how-investment-structure-content {
+  max-width: 100%;
+}
+
+.how-investment-roi-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.how-investment-paragraph {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.how-investment-math-list {
+  margin: 0;
+  padding: 0 0 0 1.1em;
+  list-style: disc;
+}
+
+.how-investment-math-item {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.how-investment-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 8px;
+}
+
+.how-investment-item {
+  position: relative;
+  padding: 16px 0;
+}
+
+.how-investment-divider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-whisper);
+}
+
+.how-investment-item-label {
+  margin: 0 0 8px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.how-investment-item-value {
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.how-investment-item-detail {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.how-investment-citation {
+  margin-top: 16px;
+}
+
+.how-investment-guarantee {
+  margin: 32px auto 0;
+  max-width: 580px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-primary);
+}
+
+/* §F Command Centre */
+.how-command-desc {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.how-command-desc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.how-command-paragraph {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.how-command-visual-card.bento-card-slot,
+.how-command-visual-card .bento-card {
+  min-height: 420px;
+}
+
+.how-command-preview-content {
+  max-width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.how-command-metric-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.how-we-work-page .how-command-visual-card .metric-chip-value {
+  color: var(--accent);
+}
+
+.how-command-visual-layer {
+  width: 72%;
+  right: -14%;
+}
+
+.revarc-bars-wave {
+  width: 100%;
+  height: 100%;
+}
+
+.bars-wave-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.how-command-visual-card:hover .how-command-visual-layer {
+  opacity: 0.32;
+  filter: drop-shadow(0 0 48px var(--accent-glow));
+}
+
+.how-command-fallback-canvas {
+  display: none;
+}
+
+/* §G CTA */
+.how-cta-section {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.how-cta-section__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Responsive — tablet */
+@media (max-width: 1023px) {
+  .how-ra-validated-items {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .how-ra-validated-divider {
+    display: none;
+  }
+
+  .year-card-inner {
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+  }
+
+  .year-label {
+    font-size: 56px;
+  }
+
+  .how-command-visual-layer {
+    width: 50%;
+    right: -8%;
+  }
+}
+
+/* Responsive — mobile */
+@media (max-width: 767px) {
+  .how-we-work-hero-section,
+  .how-we-work-page .standard-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .how-we-work-hero-section {
+    padding-top: calc(var(--nav-height) + var(--nav-top-offset) + 48px);
+  }
+
+  .how-pillars-card .card-number {
+    display: none;
+  }
+
+  .how-pillars-card.bento-card-slot,
+  .how-pillars-card .bento-card {
+    min-height: auto;
+  }
+
+  .how-pillars-card .bento-card-inner {
+    padding: 24px;
+  }
+
+  .year-card-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 24px;
+  }
+
+  .year-label {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .how-investment-roi .bento-card-inner,
+  .how-investment-structure .bento-card-inner {
+    padding: 24px;
+  }
+
+  .how-command-visual-layer {
+    display: none;
+  }
+
+  .how-command-fallback-canvas {
+    display: block;
+  }
+
+  .how-command-visual-card.bento-card-slot,
+  .how-command-visual-card .bento-card {
+    min-height: 280px;
+  }
+
+  .how-cta-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .how-cta-section__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .how-cta-section__actions .cta-btn-border-glow,
+  .how-cta-section__actions .cta-btn-border-glow .border-glow-inner,
+  .how-cta-section__actions .how-cta-section__button-primary,
+  .how-cta-section__actions .how-cta-section__button-ghost {
+    width: 100%;
+  }
+
+  .how-cta-section__button-ghost {
+    min-height: 44px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .year-card-inner {
+    grid-template-columns: 100px 1fr;
+  }
+}
+
+@media (max-width: 1023px) {
+  .how-cta-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
