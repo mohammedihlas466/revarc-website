@@ -205,9 +205,10 @@ export function LocationMap({
       tabIndex={0}
       aria-expanded={isExpanded}
       aria-label={`${location} map. ${isExpanded ? "Collapse" : "Expand"} location map.`}
-      className={`relative cursor-pointer select-none ${className ?? ""}`}
+      className={`relative mx-auto w-full max-w-full cursor-pointer select-none ${className ?? ""}`}
       style={{
         perspective: 1000,
+        maxWidth: isExpanded ? expandedWidth : collapsedWidth,
       }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
