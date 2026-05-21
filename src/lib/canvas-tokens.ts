@@ -24,10 +24,10 @@ export const CANVAS_TOKENS = {
   lightRaysColor: "#7dd3fc",
   lightRaysSpeed: 0.32,
   lightRaysMouseInfluence: 0.14,
-  /** Aurora — vivid RevArc spectrum (deep cyan → accent → luminous sky) */
-  auroraColorStops: ["#0284c7", "#38bdf8", "#f0f9ff"] as const,
-  auroraAmplitude: 1.35,
-  auroraBlend: 0.88,
-  auroraSpeed: 0.48,
-  auroraIntensity: 1.35,
+  /** Aurora — Property section (atmosphereDeep → grainient navy → steel cyan) */
+  auroraColorStops: ["#061018", "#1e4a6e", "#5a9fc8"] as const,
+  auroraAmplitude: 0.95,
+  auroraBlend: 0.6,
+  auroraSpeed: 0.42,
+  auroraIntensity: 0.7,
 } as const;
