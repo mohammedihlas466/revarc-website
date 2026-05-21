@@ -18,8 +18,8 @@ export default function AboutPage() {
   return (
     <div className="about-page-root">
       <NavBar />
+      <AboutHeroSection />
       <main className="about-page">
-        <AboutHeroSection />
         <SectionDivider />
         <AboutFounderSection />
         <SectionDivider />

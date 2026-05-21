@@ -3397,13 +3397,13 @@ main {
 .about-page-root {
   width: 100%;
   max-width: 100%;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 .about-page {
   width: 100%;
   max-width: 100%;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 .about-page-root + .site-footer-zone .site-footer-stage {
@@ -3418,6 +3418,7 @@ main {
   animation: none;
 }
 
+/* Mobile-first hero — full viewport width (sibling of main, not clipped by .about-page) */
 .about-hero-section {
   position: relative;
   width: 100%;
@@ -3429,7 +3430,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 160px var(--section-pad-x) 100px;
+  padding: 100px var(--section-pad-x) 60px;
   overflow: hidden;
   isolation: isolate;
   box-sizing: border-box;
@@ -3438,16 +3439,24 @@ main {
 .about-hero-bg-stack {
   position: absolute;
   inset: 0;
-  left: 0;
-  right: 0;
   z-index: 0;
   width: 100%;
-  max-width: 100%;
   height: 100%;
   min-height: inherit;
   overflow: hidden;
   pointer-events: none;
-  background: var(--void);
+  background:
+    radial-gradient(
+      ellipse 130% 90% at 50% 28%,
+      rgba(56, 189, 248, 0.22) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 100% 70% at 72% 78%,
+      rgba(15, 40, 72, 0.55) 0%,
+      transparent 52%
+    ),
+    var(--void);
 }
 
 .about-hero-darkveil-layer {
@@ -3804,29 +3813,19 @@ main {
   display: none;
 }
 
-@media (max-width: 1023px) {
+@media (min-width: 768px) {
   .about-hero-section {
-    width: 100vw;
-    max-width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    min-height: 100vh;
-    min-height: 100svh;
-    height: 100vh;
-    height: 100svh;
     padding: 120px var(--section-pad-x) 80px;
-    box-sizing: border-box;
   }
+}
 
-  .about-hero-bg-stack {
-    width: 100vw;
-    max-width: 100vw;
-    left: 0;
-    right: 0;
-    margin-left: 0;
-    margin-right: 0;
+@media (min-width: 1024px) {
+  .about-hero-section {
+    padding: 160px var(--section-pad-x) 100px;
   }
+}
 
+@media (max-width: 1023px) {
   .about-founder__narrative {
     grid-column: span 12;
   }
@@ -3876,35 +3875,6 @@ main {
 @media (max-width: 767px) {
   .about-page-root + .site-footer-zone .site-footer-stage {
     padding-top: 40px;
-  }
-
-  .about-hero-section {
-    width: 100vw;
-    max-width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    min-height: 100vh;
-    min-height: 100svh;
-    height: 100vh;
-    height: 100svh;
-    padding: 100px 20px 60px;
-    box-sizing: border-box;
-  }
-
-  .about-hero-bg-stack {
-    width: 100vw;
-    max-width: 100vw;
-    left: 0;
-    right: 0;
-  }
-
-  .about-hero-darkveil-layer,
-  .about-hero-darkveil-layer .revarc-darkveil,
-  .about-hero-darkveil-layer .darkveil-canvas {
-    width: 100%;
-    height: 100%;
-    left: 0;
-    right: 0;
   }
 
   .about-hero-section__inner {

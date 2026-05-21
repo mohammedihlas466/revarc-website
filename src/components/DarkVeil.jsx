@@ -144,8 +144,8 @@ export default function DarkVeil({
       const h = Math.round(rect.height);
       if (w < 1 || h < 1) return;
 
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
       renderer.setSize(w * resolutionScale, h * resolutionScale);
       program.uniforms.uResolution.value.set(w, h);
     };
@@ -154,7 +154,10 @@ export default function DarkVeil({
     ro.observe(resizeRoot);
 
     window.addEventListener("resize", resize);
+    window.visualViewport?.addEventListener("resize", resize);
+    window.visualViewport?.addEventListener("scroll", resize);
     resize();
+    requestAnimationFrame(resize);
     requestAnimationFrame(resize);
 
     const start = performance.now();
@@ -178,6 +181,8 @@ export default function DarkVeil({
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("resize", resize);
+      window.visualViewport?.removeEventListener("resize", resize);
+      window.visualViewport?.removeEventListener("scroll", resize);
       ro.disconnect();
     };
   }, [hueShift, revarcBlue, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale]);
