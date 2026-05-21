@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SmoothScroll } from "@/components/animation/SmoothScroll";
 import { PageAtmosphere } from "@/components/layout/PageAtmosphere";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { fontUi, fontVariables } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import "./globals.css";
@@ -43,6 +44,7 @@ export default function RootLayout({
         <SmoothScroll>
           <PageAtmosphere />
           {children}
+          <SiteFooter />
         </SmoothScroll>
       </body>
     </html>
