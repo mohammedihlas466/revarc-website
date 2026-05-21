@@ -38,7 +38,7 @@ const SERVICE_TAGS = [
 
 const STAT_ITEMS = [
   { value: "3–4×", label: "RETURN ON AD SPEND" },
-  { value: "$0.47", label: "COST PER CONVERSATION" },
+  { value: "€0.47", label: "COST PER CONVERSATION" },
   { value: "7", label: "INTERNATIONAL MARKETS" },
   { value: "25×", label: "REVENUE VS. MEDIA INVESTMENT" },
 ] as const;

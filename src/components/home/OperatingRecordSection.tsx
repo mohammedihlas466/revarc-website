@@ -26,7 +26,7 @@ const REBUILD_LEAD =
   "RevArc rebuilt three revenue channels in parallel and operated all three in concert for over two years.";
 
 const REBUILD_BODY =
-  "The direct booking engine generated hundreds of confirmed bookings through Meta Ads and WhatsApp at $0.47 per conversation. The OTA channel was rehabilitated to Booking.com Preferred Partner status, reaching seven international markets. Two productised revenue packages — a Valentine's Day experience and a Day Out package — were architected, launched, and both generated confirmed bookings and real revenue.";
+  "The direct booking engine generated hundreds of confirmed bookings through Meta Ads and WhatsApp at €0.47 per conversation. The OTA channel was rehabilitated to Booking.com Preferred Partner status, reaching seven international markets. Two productised revenue packages — a Valentine's Day experience and a Day Out package — were architected, launched, and both generated confirmed bookings and real revenue.";
 
 const ENGINE_BODY =
   "The result is a working revenue engine: owner-controlled, year-round, and re-engineerable.";

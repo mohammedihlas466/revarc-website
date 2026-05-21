@@ -1053,9 +1053,9 @@ main {
 
 .diagnosis-paragraph {
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.8;
+  line-height: 2;
   letter-spacing: 0.02em;
   color: var(--text-body);
 }
@@ -1063,6 +1063,7 @@ main {
 .diagnosis-panel .source-citation {
   margin-top: 16px;
   margin-bottom: 0;
+  opacity: 0.4;
 }
 
 .diagnosis-closing-band {
@@ -1805,11 +1806,11 @@ main {
 }
 
 .field-study-beat-lead .scroll-spotlight-copy {
-  max-width: 18ch;
+  max-width: 28ch;
 }
 
 .field-study-beat-body .scroll-spotlight-copy {
-  max-width: 42ch;
+  max-width: 58ch;
 }
 
 .field-study-beats {
@@ -2104,6 +2105,68 @@ main {
   max-width: 100%;
 }
 
+/* OTA partner — typographic mark (no progress / status chip) */
+.polar-ota-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  padding: 8px 0 4px;
+  text-align: center;
+}
+
+.polar-ota-mark__eyebrow {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.polar-ota-mark__rule {
+  display: block;
+  width: 32px;
+  height: 1px;
+  margin: 14px auto 16px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-active) 20%,
+    var(--silver-mid) 50%,
+    var(--border-active) 80%,
+    transparent
+  );
+  opacity: 0.85;
+}
+
+.polar-ota-mark__title {
+  margin: 0;
+  font-size: clamp(22px, 2.8vw, 30px);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.polar-ota-mark__title-italic {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text-secondary);
+}
+
+.polar-ota-mark__platform {
+  margin: 10px 0 0;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
 /* Sliding number — odometer (Motion Primitives / Aceternity pattern) */
 .revarc-sliding-number {
   display: inline-flex;
@@ -2191,7 +2254,7 @@ main {
 .scroll-spotlight--display .scroll-spotlight-copy {
   font-size: clamp(32px, 4.5vw, 58px);
   line-height: 1.1;
-  max-width: 16ch;
+  max-width: 30ch;
 }
 
 .scroll-spotlight:not(.scroll-spotlight--display) .scroll-spotlight-copy {
@@ -2199,7 +2262,7 @@ main {
   line-height: 1.78;
   letter-spacing: 0.02em;
   color: var(--text-secondary);
-  max-width: 46ch;
+  max-width: 62ch;
 }
 
 .scroll-spotlight-word {

@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 const FLOATING_STATS = [
   { value: "3–4×", label: "RETURN ON AD SPEND" },
-  { value: "$0.47", label: "COST PER CONVERSATION" },
+  { value: "€0.47", label: "COST PER CONVERSATION" },
 ] as const;
 
 export function HeroSection() {

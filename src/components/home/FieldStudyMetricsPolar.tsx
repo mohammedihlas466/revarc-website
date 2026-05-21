@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { FieldStudyPolarMetricCard } from "@/components/animation/field-study-metrics/FieldStudyPolarMetricCard";
-import { PolarAnimatedCheck } from "@/components/animation/field-study-metrics/PolarAnimatedCheck";
+import { PolarOtaPartnerMark } from "@/components/animation/field-study-metrics/PolarOtaPartnerMark";
 import { PolarMinimalStar } from "@/components/animation/field-study-metrics/PolarMinimalStar";
 import { PolarRetroCountdown } from "@/components/animation/field-study-metrics/PolarRetroCountdown";
 import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
@@ -18,8 +18,7 @@ const METRICS = [
   {
     index: "02 — OTA STATUS",
     caption: "Preferred Partner — Booking.com",
-    statusTag: "CONFIRMED",
-    visual: <PolarAnimatedCheck />,
+    visual: <PolarOtaPartnerMark />,
   },
   {
     index: "03 — REPUTATION",
@@ -84,7 +83,6 @@ export function FieldStudyMetricsPolar() {
             valueHighlight={
               "valueHighlight" in metric ? metric.valueHighlight : undefined
             }
-            statusTag={"statusTag" in metric ? metric.statusTag : undefined}
           />
         ))}
       </div>
