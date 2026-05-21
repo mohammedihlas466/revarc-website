@@ -4348,6 +4348,87 @@ main {
 }
 
 /* §B Property */
+.proof-property-section {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.proof-property-bg-stack {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--void);
+}
+
+.proof-property-aurora-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.54;
+}
+
+.proof-property-aurora-canvas .revarc-property-aurora,
+.proof-property-aurora-canvas .aurora-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.proof-property-aurora-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.proof-property-aurora-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    radial-gradient(
+      ellipse 90% 55% at 50% 100%,
+      var(--accent-glow-strong) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 70% 45% at 18% 88%,
+      rgba(15, 36, 56, 0.55) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 70% 45% at 82% 88%,
+      rgba(6, 16, 24, 0.62) 0%,
+      transparent 58%
+    );
+}
+
+.proof-property-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(2, 2, 2, 0.58) 0%,
+      rgba(2, 2, 2, 0.22) 28%,
+      rgba(2, 2, 2, 0.14) 52%,
+      rgba(2, 2, 2, 0.36) 100%
+    );
+}
+
+.proof-property-section__inner {
+  position: relative;
+  z-index: 1;
+}
+
 .proof-property-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -4669,7 +4750,7 @@ main {
   width: 100%;
   height: 100%;
   z-index: 1;
-  opacity: 0.38;
+  opacity: 0.58;
 }
 
 .proof-evidence-light-rays-layer .revarc-evidence-light-rays,
@@ -4686,10 +4767,10 @@ main {
   z-index: 2;
   background: linear-gradient(
     to bottom,
-    rgba(2, 2, 2, 0.42) 0%,
-    rgba(2, 2, 2, 0.1) 42%,
-    rgba(2, 2, 2, 0.1) 72%,
-    rgba(2, 2, 2, 0.48) 100%
+    rgba(2, 2, 2, 0.32) 0%,
+    rgba(2, 2, 2, 0.06) 42%,
+    rgba(2, 2, 2, 0.06) 72%,
+    rgba(2, 2, 2, 0.38) 100%
   );
 }
 
@@ -4925,6 +5006,25 @@ main {
 
   .proof-property-column {
     grid-column: span 12;
+  }
+
+  .proof-property-aurora-canvas {
+    display: none;
+  }
+
+  .proof-property-bg-stack {
+    background:
+      radial-gradient(
+        ellipse 100% 65% at 50% 100%,
+        var(--accent-glow) 0%,
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 80% 50% at 50% 0%,
+        rgba(12, 26, 46, 0.55) 0%,
+        transparent 62%
+      ),
+      var(--void);
   }
 
   .proof-diagnosis-card .card-canvas-layer {

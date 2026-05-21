@@ -1,11 +1,11 @@
 "use client";
 
-import LightRays from "@/components/LightRays";
+import Aurora from "@/components/Aurora";
 import { CANVAS_TOKENS } from "@/lib/canvas-tokens";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
-type RevArcEvidenceLightRaysProps = {
+type RevArcPropertyAuroraProps = {
   className?: string;
 };
 
@@ -22,11 +22,9 @@ function detectWebGL(): boolean {
 }
 
 /**
- * RevArc wrapper — React Bits Light Rays for Proof Evidence atmosphere.
+ * RevArc wrapper — React Bits Aurora for Proof Property atmosphere.
  */
-export function RevArcEvidenceLightRays({
-  className,
-}: RevArcEvidenceLightRaysProps) {
+export function RevArcPropertyAurora({ className }: RevArcPropertyAuroraProps) {
   const [ready, setReady] = useState(false);
   const [webglOk, setWebglOk] = useState(false);
   const [enabled, setEnabled] = useState(true);
@@ -48,23 +46,12 @@ export function RevArcEvidenceLightRays({
   }
 
   return (
-    <div
-      className={cn("revarc-evidence-light-rays", className)}
-      aria-hidden="true"
-    >
-      <LightRays
-        raysOrigin="top-center"
-        raysColor={CANVAS_TOKENS.lightRaysColor}
-        raysSpeed={CANVAS_TOKENS.lightRaysSpeed}
-        lightSpread={0.85}
-        rayLength={1.65}
-        pulsating={false}
-        fadeDistance={1.15}
-        saturation={0.95}
-        followMouse
-        mouseInfluence={CANVAS_TOKENS.lightRaysMouseInfluence}
-        noiseAmount={0.08}
-        distortion={0.04}
+    <div className={cn("revarc-property-aurora", className)} aria-hidden="true">
+      <Aurora
+        colorStops={[...CANVAS_TOKENS.auroraColorStops]}
+        amplitude={CANVAS_TOKENS.auroraAmplitude}
+        blend={CANVAS_TOKENS.auroraBlend}
+        speed={CANVAS_TOKENS.auroraSpeed}
       />
     </div>
   );

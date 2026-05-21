@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { RevArcPropertyAurora } from "@/components/backgrounds/RevArcPropertyAurora";
 import { SectionHeader } from "@/components/layout/SectionHeader";
 import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
@@ -61,37 +62,47 @@ export function ProofPropertySection() {
   return (
     <section
       ref={sectionRef}
-      className="proof-property-section standard-section"
+      className="proof-property-section"
       aria-labelledby="proof-property-title"
     >
-      <SectionHeader
-        eyebrow="THE PROPERTY"
-        titleLine1="Eight rooms."
-        titleLine2="A coastline. A structural problem."
-        titleId="proof-property-title"
-      />
-
-      <div className="proof-property-grid">
-        <div className="proof-property-column proof-property-column--left">
-          {LEFT_COLUMN.map((paragraph) => (
-            <p
-              key={paragraph.slice(0, 32)}
-              className={cn("proof-property-paragraph", fontUi.className)}
-            >
-              {paragraph}
-            </p>
-          ))}
+      <div className="proof-property-bg-stack" aria-hidden="true">
+        <div className="proof-property-aurora-canvas">
+          <RevArcPropertyAurora />
         </div>
+        <div className="proof-property-aurora-glow" />
+        <div className="proof-property-scrim" />
+      </div>
 
-        <div className="proof-property-column proof-property-column--right">
-          {RIGHT_COLUMN.map((paragraph) => (
-            <p
-              key={paragraph.slice(0, 32)}
-              className={cn("proof-property-paragraph", fontUi.className)}
-            >
-              {paragraph}
-            </p>
-          ))}
+      <div className="proof-property-section__inner standard-section">
+        <SectionHeader
+          eyebrow="THE PROPERTY"
+          titleLine1="Eight rooms."
+          titleLine2="A coastline. A structural problem."
+          titleId="proof-property-title"
+        />
+
+        <div className="proof-property-grid">
+          <div className="proof-property-column proof-property-column--left">
+            {LEFT_COLUMN.map((paragraph) => (
+              <p
+                key={paragraph.slice(0, 32)}
+                className={cn("proof-property-paragraph", fontUi.className)}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          <div className="proof-property-column proof-property-column--right">
+            {RIGHT_COLUMN.map((paragraph) => (
+              <p
+                key={paragraph.slice(0, 32)}
+                className={cn("proof-property-paragraph", fontUi.className)}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -23,4 +23,10 @@ export const CANVAS_TOKENS = {
   /** Light Rays — accent beam for Proof Evidence section */
   lightRaysColor: "#7dd3fc",
   lightRaysSpeed: 0.32,
+  lightRaysMouseInfluence: 0.14,
+  /** Aurora — Proof Property section (deep void → accent → atmosphere) */
+  auroraColorStops: ["#061018", "#38bdf8", "#0f2438"] as const,
+  auroraAmplitude: 0.72,
+  auroraBlend: 0.68,
+  auroraSpeed: 0.42,
 } as const;
