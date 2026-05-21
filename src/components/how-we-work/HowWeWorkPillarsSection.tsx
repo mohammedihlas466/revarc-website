@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { ScrollSpotlightText } from "@/components/animation/ScrollSpotlightText";
 import { NetworkNodesCanvas } from "@/components/animation/NetworkNodesCanvas";
 import { PulseRingsCanvas } from "@/components/animation/PulseRingsCanvas";
 import { WaveformCanvas } from "@/components/animation/WaveformCanvas";
@@ -64,14 +65,9 @@ export function HowWeWorkPillarsSection() {
       const cards = gsap.utils.toArray<HTMLElement>(
         ".how-pillars-card .bento-card"
       );
-      const below = section.querySelector(".how-pillars-below");
 
       if (reduceMotion) {
-        gsap.set([...cards, below].filter(Boolean), {
-          opacity: 1,
-          y: 0,
-          clearProps: "all",
-        });
+        gsap.set(cards, { opacity: 1, y: 0, clearProps: "all" });
         return;
       }
 
@@ -89,22 +85,6 @@ export function HowWeWorkPillarsSection() {
           once: true,
         },
       });
-
-      if (below) {
-        gsap.from(below, {
-          y: 24,
-          opacity: 0,
-          duration: 0.8,
-          ease: "expo.out",
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: below,
-            start: "top 85%",
-            toggleActions: "play none none none",
-            once: true,
-          },
-        });
-      }
     },
     { scope: sectionRef, dependencies: [scrollReady] }
   );
@@ -169,7 +149,9 @@ export function HowWeWorkPillarsSection() {
         </div>
       </div>
 
-      <p className={cn("how-pillars-below", fontUi.className)}>{BELOW_GRID}</p>
+      <div className="how-pillars-below">
+        <ScrollSpotlightText text={BELOW_GRID} variant="display" />
+      </div>
     </section>
   );
 }

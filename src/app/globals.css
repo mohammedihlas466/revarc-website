@@ -5208,16 +5208,6 @@ main {
   min-height: 360px;
 }
 
-.how-pillars-below {
-  margin: 40px auto 0;
-  max-width: 640px;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.75;
-  color: var(--text-secondary);
-}
-
 /* §C Revenue Architecture */
 .how-ra-narrative-content,
 .how-ra-validated-content {
@@ -5369,6 +5359,7 @@ main {
   gap: var(--grid-gap);
 }
 
+.how-pillars-below,
 .how-partnership-closing,
 .how-investment-guarantee {
   margin: clamp(72px, 12vh, 140px) auto 0;
@@ -5380,11 +5371,13 @@ main {
   align-items: center;
 }
 
+.how-pillars-below .scroll-spotlight,
 .how-partnership-closing .scroll-spotlight,
 .how-investment-guarantee .scroll-spotlight {
   width: 100%;
 }
 
+.how-pillars-below .scroll-spotlight-copy,
 .how-partnership-closing .scroll-spotlight-copy,
 .how-investment-guarantee .scroll-spotlight-copy {
   text-align: center;
@@ -5396,6 +5389,7 @@ main {
   letter-spacing: -0.015em;
 }
 
+.how-pillars-below .scroll-spotlight-beam,
 .how-partnership-closing .scroll-spotlight-beam,
 .how-investment-guarantee .scroll-spotlight-beam {
   inset: -18% -12%;
@@ -5636,12 +5630,14 @@ main {
     margin-bottom: 16px;
   }
 
+  .how-pillars-below,
   .how-partnership-closing,
   .how-investment-guarantee {
     margin-top: 48px;
     padding: 56px 20px 72px;
   }
 
+  .how-pillars-below .scroll-spotlight-copy,
   .how-partnership-closing .scroll-spotlight-copy,
   .how-investment-guarantee .scroll-spotlight-copy {
     max-width: none;
