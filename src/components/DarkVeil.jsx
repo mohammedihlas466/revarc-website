@@ -138,14 +138,36 @@ export default function DarkVeil({
       parent.closest('.about-hero-darkveil-layer') ||
       parent;
 
+    const isHeroViewport = resizeRoot.closest("[data-hero-viewport]");
+
     const resize = () => {
-      const rect = resizeRoot.getBoundingClientRect();
-      const w = Math.round(rect.width);
-      const h = Math.round(rect.height);
+      let w;
+      let h;
+
+      if (isHeroViewport) {
+        w = Math.round(
+          window.visualViewport?.width ??
+            document.documentElement.clientWidth ??
+            window.innerWidth
+        );
+        const hero = resizeRoot.closest(".about-hero-section");
+        h = Math.round(
+          hero?.getBoundingClientRect().height ?? window.innerHeight
+        );
+      } else {
+        const rect = resizeRoot.getBoundingClientRect();
+        w = Math.round(rect.width);
+        h = Math.round(rect.height);
+      }
+
       if (w < 1 || h < 1) return;
 
-      canvas.style.width = "100%";
-      canvas.style.height = "100%";
+      canvas.style.position = "absolute";
+      canvas.style.top = "0";
+      canvas.style.left = "0";
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      canvas.style.maxWidth = "none";
       renderer.setSize(w * resolutionScale, h * resolutionScale);
       program.uniforms.uResolution.value.set(w, h);
     };

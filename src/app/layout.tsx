@@ -6,6 +6,13 @@ import { fontUi, fontVariables } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   title: "RevArc — Revenue Architecture for Boutique Hotels",
   description:

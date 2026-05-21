@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { RevArcDarkVeil } from "@/components/backgrounds/RevArcDarkVeil";
+import { useAboutHeroViewport } from "@/hooks/useAboutHeroViewport";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { fontDisplay, fontUi } from "@/lib/fonts";
@@ -18,6 +19,7 @@ const SUBTITLE =
 
 export function AboutHeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  useAboutHeroViewport(sectionRef);
 
   useGSAP(
     () => {
@@ -85,7 +87,7 @@ export function AboutHeroSection() {
       className="about-hero-section"
       aria-labelledby="about-hero-heading"
     >
-      <div className="about-hero-bg-stack" aria-hidden="true">
+      <div className="about-hero-bg-stack" data-hero-viewport aria-hidden="true">
         <div className="about-hero-darkveil-layer">
           <RevArcDarkVeil />
           <div className="about-hero-veil-blue-tint" />
