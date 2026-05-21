@@ -24,9 +24,9 @@ export const CANVAS_TOKENS = {
   lightRaysColor: "#7dd3fc",
   lightRaysSpeed: 0.32,
   lightRaysMouseInfluence: 0.14,
-  /** Aurora — Proof Property section (deep void → accent → atmosphere) */
-  auroraColorStops: ["#061018", "#38bdf8", "#0f2438"] as const,
-  auroraAmplitude: 0.72,
-  auroraBlend: 0.68,
+  /** Aurora — Proof Property (navy → luminous sky → cyan peak) */
+  auroraColorStops: ["#1e4a6e", "#bae6fd", "#38bdf8"] as const,
+  auroraAmplitude: 1.08,
+  auroraBlend: 0.72,
   auroraSpeed: 0.42,
 } as const;

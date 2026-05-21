@@ -9,13 +9,11 @@ type RevArcPropertyAuroraProps = {
   className?: string;
 };
 
-function detectWebGL(): boolean {
+function detectWebGL2(): boolean {
   if (typeof document === "undefined") return false;
   try {
     const canvas = document.createElement("canvas");
-    return Boolean(
-      canvas.getContext("webgl2") || canvas.getContext("webgl")
-    );
+    return Boolean(canvas.getContext("webgl2"));
   } catch {
     return false;
   }
@@ -31,7 +29,7 @@ export function RevArcPropertyAurora({ className }: RevArcPropertyAuroraProps) {
 
   useEffect(() => {
     setReady(true);
-    setWebglOk(detectWebGL());
+    setWebglOk(detectWebGL2());
 
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"

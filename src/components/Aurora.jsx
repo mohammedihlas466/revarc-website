@@ -120,28 +120,46 @@ export default function Aurora(props) {
     const ctn = ctnDom.current;
     if (!ctn) return;
 
-    const renderer = new Renderer({
-      alpha: true,
-      premultipliedAlpha: true,
-      antialias: true
-    });
-    const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    gl.canvas.style.backgroundColor = 'transparent';
-
+    let renderer;
     let program;
+    let mesh;
+    let animateId = 0;
+    let resizeObserver;
 
     function resize() {
-      if (!ctn) return;
-      const width = ctn.offsetWidth;
-      const height = ctn.offsetHeight;
+      if (!ctn || !renderer) return;
+      const width = Math.max(1, ctn.clientWidth || ctn.offsetWidth || 1);
+      const height = Math.max(1, ctn.clientHeight || ctn.offsetHeight || 1);
       renderer.setSize(width, height);
       if (program) {
         program.uniforms.uResolution.value = [width, height];
       }
     }
+
+    try {
+      renderer = new Renderer({
+        alpha: true,
+        premultipliedAlpha: true,
+        antialias: true,
+        webgl: 2
+      });
+    } catch {
+      return;
+    }
+
+    const gl = renderer.gl;
+    gl.clearColor(0, 0, 0, 0);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    Object.assign(gl.canvas.style, {
+      position: 'absolute',
+      inset: '0',
+      width: '100%',
+      height: '100%',
+      display: 'block',
+      backgroundColor: 'transparent'
+    });
+
     window.addEventListener('resize', resize);
 
     const geometry = new Triangle(gl);
@@ -154,22 +172,27 @@ export default function Aurora(props) {
       return [c.r, c.g, c.b];
     });
 
-    program = new Program(gl, {
-      vertex: VERT,
-      fragment: FRAG,
-      uniforms: {
-        uTime: { value: 0 },
-        uAmplitude: { value: amplitude },
-        uColorStops: { value: colorStopsArray },
-        uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
-        uBlend: { value: blend }
-      }
-    });
+    try {
+      program = new Program(gl, {
+        vertex: VERT,
+        fragment: FRAG,
+        uniforms: {
+          uTime: { value: 0 },
+          uAmplitude: { value: amplitude },
+          uColorStops: { value: colorStopsArray },
+          uResolution: { value: [ctn.clientWidth || 1, ctn.clientHeight || 1] },
+          uBlend: { value: blend }
+        }
+      });
+    } catch {
+      window.removeEventListener('resize', resize);
+      gl.getExtension('WEBGL_lose_context')?.loseContext();
+      return;
+    }
 
-    const mesh = new Mesh(gl, { geometry, program });
+    mesh = new Mesh(gl, { geometry, program });
     ctn.appendChild(gl.canvas);
 
-    let animateId = 0;
     const update = t => {
       animateId = requestAnimationFrame(update);
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
@@ -185,11 +208,15 @@ export default function Aurora(props) {
     };
     animateId = requestAnimationFrame(update);
 
+    resizeObserver = new ResizeObserver(() => resize());
+    resizeObserver.observe(ctn);
     resize();
+    requestAnimationFrame(resize);
 
     return () => {
       cancelAnimationFrame(animateId);
       window.removeEventListener('resize', resize);
+      resizeObserver?.disconnect();
       if (ctn && gl.canvas.parentNode === ctn) {
         ctn.removeChild(gl.canvas);
       }
