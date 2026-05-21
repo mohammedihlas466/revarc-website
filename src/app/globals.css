@@ -3279,6 +3279,20 @@ main {
     grid-column: span 12;
   }
 
+  .contact-hero__left {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-hero__headline {
+    align-items: center;
+  }
+
+  .contact-hero__subtitle-block {
+    margin-inline: auto;
+    text-align: center;
+  }
+
   .contact-hero-section {
     padding-top: 120px;
   }
@@ -3303,8 +3317,11 @@ main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0 24px;
     max-width: none;
+    margin-inline: auto;
+    text-align: center;
   }
 
   .contact-item {
@@ -3333,13 +3350,17 @@ main {
 
   .contact-hero__details {
     flex-direction: column;
+    align-items: center;
     gap: 0;
+    width: 100%;
+    max-width: 420px;
   }
 
   .contact-item {
     flex: 1 1 100%;
     min-width: 0;
     width: 100%;
+    justify-content: center;
   }
 
   .contact-item--last {
