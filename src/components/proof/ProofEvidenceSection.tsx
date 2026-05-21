@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { RevArcEvidenceLightRays } from "@/components/backgrounds/RevArcEvidenceLightRays";
 import { SectionHeader } from "@/components/layout/SectionHeader";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
@@ -130,47 +131,56 @@ export function ProofEvidenceSection() {
   return (
     <section
       ref={sectionRef}
-      className="proof-evidence-section standard-section"
+      className="proof-evidence-section"
       aria-labelledby="proof-evidence-title"
     >
-      <SectionHeader
-        eyebrow="THE EVIDENCE"
-        titleLine1="Receipts,"
-        titleLine2="not estimates."
-        subtitle={SUBTITLE}
-        titleId="proof-evidence-title"
-      />
+      <div className="proof-evidence-bg-stack" aria-hidden="true">
+        <div className="proof-evidence-light-rays-layer">
+          <RevArcEvidenceLightRays />
+        </div>
+        <div className="proof-evidence-scrim" />
+      </div>
 
-      <div className="proof-evidence-grid bento-grid">
-        {[DASHBOARD_CARDS.slice(0, 2), DASHBOARD_CARDS.slice(2)].map(
-          (rowCards, rowIndex) => (
-            <div key={`row-${rowIndex}`} className="proof-evidence-row bento-row">
-              {rowCards.map((card) => (
-                <BentoCard
-                  key={card.id}
-                  colSpan={6}
-                  className="proof-evidence-card"
-                  aria-labelledby={`${card.id}-label`}
-                >
-                  <div className="bento-card-content proof-evidence-content">
-                    <p
-                      id={`${card.id}-label`}
-                      className={cn("card-label", fontMono.className)}
-                    >
-                      {card.label}
-                    </p>
+      <div className="proof-evidence-section__inner standard-section">
+        <SectionHeader
+          eyebrow="THE EVIDENCE"
+          titleLine1="Receipts,"
+          titleLine2="not estimates."
+          subtitle={SUBTITLE}
+          titleId="proof-evidence-title"
+        />
 
-                    <p className={cn("proof-evidence-caption", fontUi.className)}>
-                      {card.caption}
-                    </p>
+        <div className="proof-evidence-grid bento-grid">
+          {[DASHBOARD_CARDS.slice(0, 2), DASHBOARD_CARDS.slice(2)].map(
+            (rowCards, rowIndex) => (
+              <div key={`row-${rowIndex}`} className="proof-evidence-row bento-row">
+                {rowCards.map((card) => (
+                  <BentoCard
+                    key={card.id}
+                    colSpan={6}
+                    className="proof-evidence-card"
+                    aria-labelledby={`${card.id}-label`}
+                  >
+                    <div className="bento-card-content proof-evidence-content">
+                      <p
+                        id={`${card.id}-label`}
+                        className={cn("card-label", fontMono.className)}
+                      >
+                        {card.label}
+                      </p>
 
-                    <DashboardPlaceholder caption={card.caption} />
-                  </div>
-                </BentoCard>
-              ))}
-            </div>
-          )
-        )}
+                      <p className={cn("proof-evidence-caption", fontUi.className)}>
+                        {card.caption}
+                      </p>
+
+                      <DashboardPlaceholder caption={card.caption} />
+                    </div>
+                  </BentoCard>
+                ))}
+              </div>
+            )
+          )}
+        </div>
       </div>
     </section>
   );

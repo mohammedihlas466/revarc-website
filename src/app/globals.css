@@ -4640,6 +4640,64 @@ main {
 }
 
 /* §G Evidence */
+.proof-evidence-section {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.proof-evidence-bg-stack {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse 120% 80% at 50% 0%,
+      rgba(12, 26, 46, 0.72) 0%,
+      transparent 58%
+    ),
+    var(--void);
+}
+
+.proof-evidence-light-rays-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.38;
+}
+
+.proof-evidence-light-rays-layer .revarc-evidence-light-rays,
+.proof-evidence-light-rays-layer .light-rays-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.proof-evidence-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(2, 2, 2, 0.42) 0%,
+    rgba(2, 2, 2, 0.1) 42%,
+    rgba(2, 2, 2, 0.1) 72%,
+    rgba(2, 2, 2, 0.48) 100%
+  );
+}
+
+.proof-evidence-section__inner {
+  position: relative;
+  z-index: 1;
+}
+
 .proof-evidence-content {
   max-width: 100%;
 }
@@ -4871,6 +4929,25 @@ main {
 
   .proof-diagnosis-card .card-canvas-layer {
     opacity: 0.08;
+  }
+
+  .proof-evidence-light-rays-layer {
+    display: none;
+  }
+
+  .proof-evidence-bg-stack {
+    background:
+      radial-gradient(
+        ellipse 100% 70% at 50% 0%,
+        var(--accent-glow) 0%,
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 90% 60% at 50% 100%,
+        rgba(6, 16, 24, 0.65) 0%,
+        transparent 62%
+      ),
+      var(--void);
   }
 
   .proof-pillar01-metrics {

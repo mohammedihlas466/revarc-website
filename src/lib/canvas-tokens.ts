@@ -20,4 +20,7 @@ export const CANVAS_TOKENS = {
   prismGlow: 0.84,
   prismBloom: 0.88,
   prismNoise: 0.22,
+  /** Light Rays — accent beam for Proof Evidence section */
+  lightRaysColor: "#7dd3fc",
+  lightRaysSpeed: 0.32,
 } as const;
