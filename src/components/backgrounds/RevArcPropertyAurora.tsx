@@ -50,6 +50,7 @@ export function RevArcPropertyAurora({ className }: RevArcPropertyAuroraProps) {
         amplitude={CANVAS_TOKENS.auroraAmplitude}
         blend={CANVAS_TOKENS.auroraBlend}
         speed={CANVAS_TOKENS.auroraSpeed}
+        intensity={CANVAS_TOKENS.auroraIntensity}
       />
     </div>
   );

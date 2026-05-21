@@ -18,6 +18,7 @@ uniform float uAmplitude;
 uniform vec3 uColorStops[3];
 uniform vec2 uResolution;
 uniform float uBlend;
+uniform float uIntensity;
 
 out vec4 fragColor;
 
@@ -98,7 +99,7 @@ void main() {
   float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
   height = exp(height);
   height = (uv.y * 2.0 - height + 0.2);
-  float intensity = 0.6 * height;
+  float intensity = uIntensity * height;
   
   float midPoint = 0.20;
   float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
@@ -110,7 +111,12 @@ void main() {
 `;
 
 export default function Aurora(props) {
-  const { colorStops = ['#5227FF', '#7cff67', '#5227FF'], amplitude = 1.0, blend = 0.5 } = props;
+  const {
+    colorStops = ['#5227FF', '#7cff67', '#5227FF'],
+    amplitude = 1.0,
+    blend = 0.5,
+    intensity = 0.6
+  } = props;
   const propsRef = useRef(props);
   propsRef.current = props;
 
@@ -181,7 +187,8 @@ export default function Aurora(props) {
           uAmplitude: { value: amplitude },
           uColorStops: { value: colorStopsArray },
           uResolution: { value: [ctn.clientWidth || 1, ctn.clientHeight || 1] },
-          uBlend: { value: blend }
+          uBlend: { value: blend },
+          uIntensity: { value: intensity }
         }
       });
     } catch {
@@ -199,6 +206,7 @@ export default function Aurora(props) {
       program.uniforms.uTime.value = time * speed * 0.1;
       program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
       program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
+      program.uniforms.uIntensity.value = propsRef.current.intensity ?? intensity;
       const stops = propsRef.current.colorStops ?? colorStops;
       program.uniforms.uColorStops.value = stops.map(hex => {
         const c = new Color(hex);
