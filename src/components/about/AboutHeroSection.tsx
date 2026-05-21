@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { RevArcDarkVeil } from "@/components/backgrounds/RevArcDarkVeil";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { gsap, useGSAP } from "@/lib/gsap";
@@ -18,19 +18,6 @@ const SUBTITLE =
 
 export function AboutHeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [showWebGLVeil, setShowWebGLVeil] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(min-width: 1024px)").matches
-  );
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const update = () => setShowWebGLVeil(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
 
   useGSAP(
     () => {
@@ -95,15 +82,12 @@ export function AboutHeroSection() {
   return (
     <section
       ref={sectionRef}
-      className={cn(
-        "about-hero-section",
-        !showWebGLVeil && "about-hero-section--css-atmosphere"
-      )}
+      className="about-hero-section"
       aria-labelledby="about-hero-heading"
     >
       <div className="about-hero-bg-stack" aria-hidden="true">
         <div className="about-hero-darkveil-layer">
-          {showWebGLVeil ? <RevArcDarkVeil /> : null}
+          <RevArcDarkVeil />
           <div className="about-hero-veil-blue-tint" />
           <div className="about-hero-veil-blue-screen" />
         </div>

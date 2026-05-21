@@ -34,10 +34,11 @@ export function RevArcDarkVeil({ className }: RevArcDarkVeilProps) {
       "(prefers-reduced-motion: reduce)"
     ).matches;
     const narrow = window.matchMedia("(max-width: 767px)").matches;
+    const tablet = window.matchMedia("(max-width: 1023px)").matches;
 
     setConfig({
       speed: reduceMotion ? 0 : 0.32,
-      resolutionScale: narrow ? 0.85 : 1,
+      resolutionScale: narrow ? 0.75 : tablet ? 0.88 : 1,
     });
   }, []);
 

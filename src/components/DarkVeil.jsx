@@ -134,56 +134,61 @@ export default function DarkVeil({
     const mesh = new Mesh(gl, { geometry, program });
 
     const resizeRoot =
-      parent.closest('.about-hero-bg-stack') ||
-      parent.closest('.about-hero-darkveil-layer') ||
+      parent.closest(".about-hero-darkveil-layer") ||
+      parent.closest(".about-hero-bg-stack") ||
       parent;
 
-    const isHeroViewport = resizeRoot.closest("[data-hero-viewport]");
-
     const resize = () => {
-      let w;
-      let h;
+      const rect = resizeRoot.getBoundingClientRect();
+      let w = Math.round(rect.width);
+      let h = Math.round(rect.height);
 
-      if (isHeroViewport) {
-        w = Math.round(
-          window.visualViewport?.width ??
-            document.documentElement.clientWidth ??
-            window.innerWidth
-        );
+      if (w < 48) {
         const hero = resizeRoot.closest(".about-hero-section");
-        h = Math.round(
-          hero?.getBoundingClientRect().height ?? window.innerHeight
-        );
-      } else {
-        const rect = resizeRoot.getBoundingClientRect();
-        w = Math.round(rect.width);
-        h = Math.round(rect.height);
+        const heroRect = hero?.getBoundingClientRect();
+        if (heroRect && heroRect.width >= 48) {
+          w = Math.round(heroRect.width);
+          h = Math.round(heroRect.height);
+        }
       }
 
-      if (w < 1 || h < 1) return;
+      if (w < 48 || h < 48) return;
 
       canvas.style.position = "absolute";
-      canvas.style.top = "0";
-      canvas.style.left = "0";
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
+      canvas.style.inset = "0";
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
       canvas.style.maxWidth = "none";
-      renderer.setSize(w * resolutionScale, h * resolutionScale);
-      program.uniforms.uResolution.value.set(w, h);
+      canvas.style.display = "block";
+
+      const drawW = Math.max(1, Math.round(w * resolutionScale));
+      const drawH = Math.max(1, Math.round(h * resolutionScale));
+      renderer.setSize(drawW, drawH);
+      program.uniforms.uResolution.value.set(drawW, drawH);
     };
 
     const ro = new ResizeObserver(() => resize());
     ro.observe(resizeRoot);
 
+    const heroSection = resizeRoot.closest(".about-hero-section");
+    if (heroSection && heroSection !== resizeRoot) {
+      ro.observe(heroSection);
+    }
+
     window.addEventListener("resize", resize);
     window.visualViewport?.addEventListener("resize", resize);
-    window.visualViewport?.addEventListener("scroll", resize);
     resize();
-    requestAnimationFrame(resize);
-    requestAnimationFrame(resize);
+
+    let bootFrames = 0;
+    const bootResize = () => {
+      resize();
+      bootFrames += 1;
+      if (bootFrames < 8) requestAnimationFrame(bootResize);
+    };
+    bootResize();
 
     const start = performance.now();
-    let frame = 0;
+    let rafId = 0;
 
     const loop = () => {
       program.uniforms.uTime.value =
@@ -195,13 +200,13 @@ export default function DarkVeil({
       program.uniforms.uScanFreq.value = scanlineFrequency;
       program.uniforms.uWarp.value = warpAmount;
       renderer.render({ scene: mesh });
-      frame = requestAnimationFrame(loop);
+      rafId = requestAnimationFrame(loop);
     };
 
     loop();
 
     return () => {
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(rafId);
       window.removeEventListener("resize", resize);
       window.visualViewport?.removeEventListener("resize", resize);
       window.visualViewport?.removeEventListener("scroll", resize);
