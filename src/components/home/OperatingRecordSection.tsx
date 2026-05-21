@@ -4,17 +4,13 @@ import Link from "next/link";
 import { useRef } from "react";
 import { FieldStudyPolarScroll } from "@/components/animation/FieldStudyPolarScroll";
 import { ScrollSpotlightText } from "@/components/animation/ScrollSpotlightText";
-import { CardVisual } from "@/components/backgrounds/CardVisual";
-import { RevArcMagicDottedMap } from "@/components/backgrounds/RevArcMagicDottedMap";
-import { RevArcMetallicOrb } from "@/components/backgrounds/RevArcMetallicOrb";
-import { RevArcMeteorOrbit } from "@/components/backgrounds/RevArcMeteorOrbit";
+import { FieldStudyMetricsPolar } from "@/components/home/FieldStudyMetricsPolar";
 import { FieldStudyVisual } from "@/components/home/FieldStudyVisual";
 import { SectionHeader } from "@/components/layout/SectionHeader";
-import { BentoCard } from "@/components/ui/BentoCard";
 import { RevArcWordsStagger } from "@/components/ui/RevArcWordsStagger";
 import { SourceCitation } from "@/components/ui/SourceCitation";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { fontDisplay, fontMono, fontUi } from "@/lib/fonts";
+import { fontMono } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
 const PROLOGUE =
@@ -36,31 +32,6 @@ const ENGINE_BODY =
 
 const CITATION =
   "All metrics sourced from Meta Ads Manager, Booking.com Partner Extranet, Agoda YCS Dashboard, and Google Business Profile. Named guest records available on request.";
-
-const METRIC_BENTOS = [
-  {
-    ghost: "01",
-    label: "DIRECT ACQUISITION",
-    value: "Hundreds",
-    sub: "of confirmed bookings",
-    visual: "meteor" as const,
-  },
-  {
-    ghost: "02",
-    label: "OTA STATUS",
-    value: "Preferred",
-    sub: "Partner — Booking.com",
-    statusTag: "CONFIRMED",
-    visual: "map" as const,
-  },
-  {
-    ghost: "03",
-    label: "REPUTATION",
-    value: "4.7★",
-    sub: "across 55+ reviews",
-    visual: "orb" as const,
-  },
-] as const;
 
 function FieldStudyBeatRow({
   index,
@@ -110,7 +81,6 @@ function FieldStudyBeatRow({
 
 export function OperatingRecordSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const metricsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -124,12 +94,9 @@ export function OperatingRecordSection() {
       const beats = gsap.utils.toArray<HTMLElement>(".field-study-beat");
       const prologue = section.querySelector(".field-study-prologue");
       const closure = section.querySelector(".field-study-closure");
-      const metricCards = gsap.utils.toArray<HTMLElement>(
-        ".field-study-metrics .bento-card"
-      );
 
       if (reduceMotion) {
-        gsap.set([prologue, ...beats, closure, ...metricCards], {
+        gsap.set([prologue, ...beats, closure], {
           opacity: 1,
           y: 0,
           clearProps: "all",
@@ -162,23 +129,6 @@ export function OperatingRecordSection() {
 
       if (closure) {
         reveal(closure, closure);
-      }
-
-      if (metricsRef.current && metricCards.length) {
-        gsap.from(metricCards, {
-          y: 60,
-          opacity: 0,
-          duration: 1,
-          ease: "expo.out",
-          stagger: 0.15,
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: metricsRef.current,
-            start: "top 88%",
-            toggleActions: "play none none none",
-            once: true,
-          },
-        });
       }
     },
     { scope: sectionRef }
@@ -245,73 +195,7 @@ export function OperatingRecordSection() {
             </Link>
           </div>
 
-          <div
-            ref={metricsRef}
-            className="field-study-metrics bento-grid"
-            aria-label="Case study proof metrics"
-          >
-            <div className="bento-row field-study-metrics-row">
-              {METRIC_BENTOS.map((metric) => (
-                <BentoCard
-                  key={metric.label}
-                  colSpan={4}
-                  ghostNumeral={metric.ghost}
-                  borderGlow
-                  className={cn(
-                    "field-study-metric-card",
-                    `field-study-metric-card--${metric.visual}`
-                  )}
-                  aria-labelledby={`field-metric-${metric.ghost}`}
-                >
-                  <CardVisual className="field-study-metric-visual">
-                    {metric.visual === "meteor" ? (
-                      <RevArcMeteorOrbit />
-                    ) : null}
-                    {metric.visual === "map" ? (
-                      <RevArcMagicDottedMap variant="footprint" />
-                    ) : null}
-                    {metric.visual === "orb" ? (
-                      <RevArcMetallicOrb variant="active" />
-                    ) : null}
-                  </CardVisual>
-
-                  <div className="bento-card-content field-study-metric-content">
-                    <p className={cn("card-label", fontMono.className)}>
-                      <span className="card-label-dot" aria-hidden="true" />
-                      {metric.label}
-                    </p>
-                    <p
-                      id={`field-metric-${metric.ghost}`}
-                      className={cn(
-                        "field-study-metric-value",
-                        fontDisplay.className
-                      )}
-                    >
-                      {metric.value}
-                    </p>
-                    <p
-                      className={cn(
-                        "field-study-metric-sub",
-                        fontUi.className
-                      )}
-                    >
-                      {metric.sub}
-                    </p>
-                    {"statusTag" in metric && metric.statusTag ? (
-                      <span
-                        className={cn(
-                          "status-tag-confirmed",
-                          fontMono.className
-                        )}
-                      >
-                        {metric.statusTag}
-                      </span>
-                    ) : null}
-                  </div>
-                </BentoCard>
-              ))}
-            </div>
-          </div>
+          <FieldStudyMetricsPolar />
         </div>
       </div>
     </section>

@@ -1926,37 +1926,177 @@ main {
   margin: 0 0 4px;
 }
 
-.field-study-metrics {
+/* Field Study — Polar-scale proof metric cards (Locomotive / polar.sh proportions) */
+.field-study-metrics-polar {
   margin-top: 8px;
-}
-
-.field-study-metrics-row {
   width: 100%;
 }
 
-.field-study-metric-card {
-  min-height: 360px;
+.field-study-metrics-polar__row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  width: 100%;
+  align-items: stretch;
 }
 
-.field-study-metric-content {
+.polar-metric-card {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  aspect-ratio: 3 / 5;
+  max-height: 640px;
+  padding: 0;
+  background: var(--obsidian);
+  border: 1px solid var(--border-whisper);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color var(--duration-fast) ease;
+}
+
+.polar-metric-card:hover {
+  border-color: rgba(192, 192, 192, 0.12);
+}
+
+/* ~58% visual / ~42% copy — matches polar.sh feature cards */
+.polar-metric-card__visual {
+  flex: 0 0 58%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: clamp(28px, 4vw, 44px) clamp(20px, 3vw, 28px);
   position: relative;
-  z-index: 2;
 }
 
-.field-study-metric-value {
-  font-size: clamp(36px, 4vw, 48px);
+.polar-metric-card__body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 clamp(22px, 3vw, 30px) clamp(26px, 3.2vw, 34px);
+}
+
+.polar-metric-card__index {
+  margin: 0 0 14px;
+  font-size: clamp(17px, 1.9vw, 22px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.polar-metric-card__rule {
+  margin: 0 0 16px;
+  border: none;
+  height: 1px;
+  width: 28%;
+  min-width: 72px;
+  max-width: 120px;
+  background: var(--border-active);
+}
+
+.polar-metric-card__value {
+  margin: 0 0 6px;
+  font-size: clamp(28px, 3.2vw, 36px);
   font-weight: 300;
   line-height: 1;
-  color: var(--accent);
-  margin: 8px 0 6px;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
-.field-study-metric-sub {
-  font-size: 14px;
+.polar-metric-card__caption {
+  margin: 0;
+  font-size: clamp(13px, 1.35vw, 15px);
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--text-secondary);
+  max-width: 32ch;
 }
+
+.polar-metric-card__sub {
+  margin: 8px 0 0;
+  font-size: clamp(12px, 1.2vw, 14px);
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--label);
+  max-width: 32ch;
+}
+
+.polar-metric-card__tag {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+}
+
+/* Shared hero graphic slot — tall, centered, polar line-art scale */
+.polar-metric-hero {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.polar-metric-hero--check,
+.polar-metric-hero--star {
+  max-width: 168px;
+  min-height: 200px;
+}
+
+.polar-metric-hero--number {
+  max-width: 100%;
+  min-height: 120px;
+}
+
+/* Sliding number — odometer (Motion Primitives / Aceternity pattern) */
+.revarc-sliding-number {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-ui);
+  font-size: clamp(36px, 5.2vw, 56px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.polar-sliding-million {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  max-width: 100%;
+  transform: scale(1);
+  transform-origin: center center;
+}
+
+.polar-sliding-million__sep {
+  font-family: var(--font-ui);
+  font-size: clamp(36px, 5.2vw, 56px);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--silver-mid);
+  margin: 0 0.06em;
+  user-select: none;
+}
+
+.polar-sliding-million__group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.polar-sliding-million__lead .revarc-sliding-number {
+  margin-right: 0.02em;
+}
+
+.polar-check-rays {
+  transform-origin: 100px 118px;
+}
+
 
 /* Scroll-driven staggered spotlight */
 .scroll-spotlight {
@@ -2057,6 +2197,24 @@ main {
   .bento-card-slot--4 {
     grid-column: span 12;
   }
+
+  .polar-metric-card {
+    grid-column: span 12;
+    aspect-ratio: auto;
+    min-height: 460px;
+    max-height: none;
+  }
+
+  .polar-metric-card__visual {
+    min-height: 260px;
+    flex-basis: 54%;
+  }
+
+  .polar-metric-hero--check,
+  .polar-metric-hero--star {
+    max-width: 148px;
+    min-height: 180px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -2089,6 +2247,29 @@ main {
 
   .field-study-beats {
     gap: 40px;
+  }
+
+  .polar-metric-card {
+    min-height: 400px;
+  }
+
+  .polar-metric-card__visual {
+    min-height: 220px;
+    padding: 24px 16px;
+  }
+
+  .revarc-sliding-number,
+  .polar-sliding-million__sep {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
+  .polar-sliding-million {
+    transform: scale(0.88);
+  }
+
+  .polar-metric-card__caption,
+  .polar-metric-card__sub {
+    max-width: none;
   }
 
   .field-study-polar-group__layout {
