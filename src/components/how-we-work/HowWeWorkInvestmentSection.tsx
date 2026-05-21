@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { ScrollSpotlightText } from "@/components/animation/ScrollSpotlightText";
 import { SectionHeader } from "@/components/layout/SectionHeader";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { SourceCitation } from "@/components/ui/SourceCitation";
@@ -75,10 +76,9 @@ export function HowWeWorkInvestmentSection() {
       const structure = section.querySelector(
         ".how-investment-structure .bento-card"
       );
-      const guarantee = section.querySelector(".how-investment-guarantee");
 
       if (reduceMotion) {
-        gsap.set([roi, structure, guarantee].filter(Boolean), {
+        gsap.set([roi, structure].filter(Boolean), {
           opacity: 1,
           y: 0,
           clearProps: "all",
@@ -112,23 +112,6 @@ export function HowWeWorkInvestmentSection() {
           immediateRender: false,
           scrollTrigger: {
             trigger: section.querySelector(".how-investment-row"),
-            start: "top 85%",
-            toggleActions: "play none none none",
-            once: true,
-          },
-        });
-      }
-
-      if (guarantee) {
-        gsap.from(guarantee, {
-          y: 24,
-          opacity: 0,
-          duration: 0.8,
-          ease: "expo.out",
-          delay: 0.2,
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: guarantee,
             start: "top 85%",
             toggleActions: "play none none none",
             once: true,
@@ -244,9 +227,9 @@ export function HowWeWorkInvestmentSection() {
         {CITATION}
       </SourceCitation>
 
-      <p className={cn("how-investment-guarantee", fontUi.className)}>
-        {GUARANTEE}
-      </p>
+      <div className="how-investment-guarantee">
+        <ScrollSpotlightText text={GUARANTEE} variant="display" />
+      </div>
     </section>
   );
 }

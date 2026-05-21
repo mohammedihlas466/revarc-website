@@ -5369,7 +5369,8 @@ main {
   gap: var(--grid-gap);
 }
 
-.how-partnership-closing {
+.how-partnership-closing,
+.how-investment-guarantee {
   margin: clamp(72px, 12vh, 140px) auto 0;
   padding: clamp(80px, 14vh, 180px) clamp(20px, 5vw, 48px);
   width: 100%;
@@ -5379,11 +5380,13 @@ main {
   align-items: center;
 }
 
-.how-partnership-closing .scroll-spotlight {
+.how-partnership-closing .scroll-spotlight,
+.how-investment-guarantee .scroll-spotlight {
   width: 100%;
 }
 
-.how-partnership-closing .scroll-spotlight-copy {
+.how-partnership-closing .scroll-spotlight-copy,
+.how-investment-guarantee .scroll-spotlight-copy {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -5393,7 +5396,8 @@ main {
   letter-spacing: -0.015em;
 }
 
-.how-partnership-closing .scroll-spotlight-beam {
+.how-partnership-closing .scroll-spotlight-beam,
+.how-investment-guarantee .scroll-spotlight-beam {
   inset: -18% -12%;
   background: radial-gradient(
     ellipse 62% 42% at 50% var(--spotlight-y),
@@ -5482,16 +5486,6 @@ main {
 
 .how-investment-citation {
   margin-top: 16px;
-}
-
-.how-investment-guarantee {
-  margin: 32px auto 0;
-  max-width: 580px;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.75;
-  color: var(--text-primary);
 }
 
 /* §F Command Centre */
@@ -5642,12 +5636,14 @@ main {
     margin-bottom: 16px;
   }
 
-  .how-partnership-closing {
+  .how-partnership-closing,
+  .how-investment-guarantee {
     margin-top: 48px;
     padding: 56px 20px 72px;
   }
 
-  .how-partnership-closing .scroll-spotlight-copy {
+  .how-partnership-closing .scroll-spotlight-copy,
+  .how-investment-guarantee .scroll-spotlight-copy {
     max-width: none;
     font-size: clamp(28px, 7.5vw, 40px);
     line-height: 1.14;
