@@ -1222,6 +1222,10 @@ main {
   grid-column: span 4;
 }
 
+.bento-card-slot--6 {
+  grid-column: span 6;
+}
+
 /* React Bits Border Glow — RevArc bento wrapper */
 .bento-border-glow.border-glow-card {
   width: 100%;
@@ -1563,6 +1567,7 @@ main {
 
 @media (max-width: 1023px) {
   .bento-card-slot--7,
+  .bento-card-slot--6,
   .bento-card-slot--5,
   .bento-card-slot--4 {
     grid-column: span 12;
@@ -4056,5 +4061,628 @@ main {
     overflow: hidden;
     padding-inline: var(--section-pad-x);
     box-sizing: border-box;
+  }
+}
+
+/* ── Mini metric card (Design System §05.12) ── */
+.mini-metric-card {
+  background: var(--obsidian);
+  border: 1px solid var(--border-whisper);
+  border-radius: 16px;
+  padding: 24px;
+  transition: border-color var(--duration-fast) ease;
+}
+
+.mini-metric-card:hover {
+  border-color: rgba(192, 192, 192, 0.08);
+}
+
+.mini-metric-label {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--label);
+  margin-bottom: 8px;
+}
+
+.mini-metric-value {
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.mini-metric-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-secondary);
+}
+
+.bento-card:hover .mini-metric-card {
+  border-color: rgba(192, 192, 192, 0.08);
+}
+
+/* ── The Proof page ── */
+.proof-page-root {
+  width: 100%;
+  min-width: 0;
+}
+
+.proof-page {
+  width: 100%;
+  min-width: 0;
+}
+
+/* §A Hero — left-aligned */
+.proof-hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 28px;
+  padding-top: calc(var(--section-pad-y) + 40px);
+}
+
+.proof-hero__eyebrow .status-pill-dot {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow-strong);
+}
+
+.proof-hero__headline {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  font-weight: 300;
+  max-width: 720px;
+}
+
+.proof-hero__headline-line {
+  display: block;
+  font-size: clamp(44px, 6.2vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.proof-hero__headline-line--silver {
+  font-style: italic;
+  color: var(--silver);
+  margin-top: 0.06em;
+}
+
+.proof-hero__subtitle {
+  margin: 0;
+  max-width: 560px;
+  font-size: clamp(14px, 1.6vw, 16px);
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+.proof-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: 8px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-whisper);
+  width: 100%;
+  max-width: 640px;
+}
+
+.proof-hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.proof-hero-stat-value {
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.proof-hero-stat-label {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.proof-hero__citation {
+  max-width: 560px;
+}
+
+/* §B Property */
+.proof-property-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(24px, 4vw, 48px);
+}
+
+.proof-property-column {
+  grid-column: span 6;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.proof-property-paragraph {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+/* §C Diagnosis */
+.proof-diagnosis-closing {
+  margin: 48px auto 0;
+  max-width: 560px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+/* §D Pillar 01 */
+.proof-pillar01-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap);
+  min-height: auto;
+}
+
+.proof-pillar01-metrics .mini-metric-card {
+  flex: 1;
+}
+
+.proof-page .proof-pillar01-metrics .mini-metric-value {
+  color: var(--accent);
+}
+
+.proof-pillar01-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.proof-pillar01-paragraph {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+.proof-pillar01-citation {
+  margin-top: 20px;
+}
+
+/* §E Revenue */
+.proof-revenue-evidence {
+  margin: 0 0 16px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.proof-revenue-status {
+  margin-top: auto;
+}
+
+.proof-group-bookings-content {
+  max-width: 100%;
+}
+
+.proof-group-bookings-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.proof-group-booking-item {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+  min-width: 0;
+}
+
+.proof-group-booking-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.proof-group-guest {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.proof-group-dates {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.proof-group-config {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.proof-group-revenue {
+  margin: 8px 0 0;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--text-primary);
+}
+
+.proof-group-revenue--featured {
+  font-size: 28px;
+}
+
+.proof-group-divider {
+  margin-right: 24px;
+  align-self: center;
+}
+
+.proof-revenue-below {
+  margin: 32px auto 0;
+  max-width: 560px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.proof-revenue-citation {
+  margin-top: 16px;
+  text-align: center;
+}
+
+/* §F OTA */
+.proof-ota-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.proof-ota-body p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.proof-page .proof-reputation-card .metric-chip-value {
+  color: var(--accent);
+}
+
+.proof-international-reach {
+  min-height: auto;
+  cursor: default;
+}
+
+.proof-international-reach:hover {
+  transform: none;
+  border-color: var(--border-whisper);
+  box-shadow: none;
+}
+
+.proof-countries-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px 16px;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.country-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  flex: 1 1 calc(14.28% - 16px);
+  min-width: 100px;
+}
+
+.country-name {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--text-primary);
+}
+
+.country-source {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.proof-ota-below {
+  margin: 32px auto 0;
+  max-width: 560px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.proof-ota-citation {
+  margin-top: 16px;
+  text-align: center;
+}
+
+/* §G Evidence */
+.proof-evidence-content {
+  max-width: 100%;
+}
+
+.proof-evidence-caption {
+  margin: 0 0 20px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.proof-evidence-image-wrap {
+  margin-top: auto;
+  width: 100%;
+  border: 1px solid var(--border-whisper);
+  border-radius: var(--card-radius-inner);
+  overflow: hidden;
+}
+
+.proof-evidence-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.proof-evidence-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 200px;
+  padding: 32px 24px;
+  background: var(--obsidian-raised);
+  border: 1px solid var(--border-whisper);
+  border-radius: var(--card-radius-inner);
+  text-align: center;
+}
+
+.proof-evidence-fallback-caption {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 360px;
+}
+
+.proof-evidence-fallback-note {
+  margin: 0;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.proof-evidence-card .bento-card:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border-active);
+}
+
+.proof-evidence-card .bento-card:hover::before,
+.proof-evidence-card .bento-card:hover::after {
+  opacity: 0;
+}
+
+/* §H Current state */
+.proof-current-narrative {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.proof-current-paragraph {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+.proof-closing-stat-bar .stat-item:last-child .stat-value {
+  color: var(--text-primary);
+}
+
+.proof-current-closing {
+  margin: 40px auto 0;
+  max-width: 560px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--text-primary);
+}
+
+/* §I CTA */
+.proof-cta-section__eyebrow--muted .status-pill-dot {
+  background: var(--silver);
+  box-shadow: none;
+}
+
+.proof-cta-section__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --section-pad-x: 24px;
+    --section-pad-y: 80px;
+  }
+
+  .proof-pillar01-metrics {
+    flex-direction: row;
+    grid-column: span 12;
+  }
+
+  .proof-pillar01-metrics .mini-metric-card {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .proof-group-bookings-row {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .proof-group-divider {
+    display: none;
+  }
+
+  .proof-countries-row {
+    justify-content: center;
+  }
+
+  .country-item {
+    flex: 1 1 calc(25% - 16px);
+  }
+}
+
+@media (max-width: 767px) {
+  .proof-hero-section {
+    padding-top: 120px;
+    gap: 24px;
+  }
+
+  .proof-hero-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px 32px;
+  }
+
+  .proof-hero-stat {
+    flex: 1 1 calc(50% - 16px);
+    min-width: 120px;
+  }
+
+  .proof-property-column {
+    grid-column: span 12;
+  }
+
+  .proof-diagnosis-card .card-canvas-layer {
+    opacity: 0.08;
+  }
+
+  .proof-pillar01-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--grid-gap);
+  }
+
+  .proof-group-bookings-row {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .proof-group-divider {
+    display: none;
+  }
+
+  .proof-countries-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 16px;
+  }
+
+  .country-item {
+    flex: none;
+    min-width: 0;
+  }
+
+  .proof-cta-section__actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .proof-cta-section__actions .cta-btn-border-glow,
+  .proof-cta-section__actions .cta-btn-border-glow .border-glow-inner,
+  .proof-cta-section__actions .proof-cta-section__button-primary,
+  .proof-cta-section__actions .proof-cta-section__button-ghost {
+    width: 100%;
+  }
+
+  .proof-cta-section__button-ghost {
+    justify-content: center;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 390px) {
+  .proof-hero-stat {
+    flex: 1 1 100%;
+  }
+
+  .proof-countries-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  :root {
+    --section-pad-x: 36px;
+    --section-pad-y: 120px;
+    --card-padding: 28px;
   }
 }

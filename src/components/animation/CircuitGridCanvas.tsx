@@ -6,12 +6,16 @@ import { cn } from "@/lib/utils";
 
 type CircuitGridCanvasProps = {
   className?: string;
+  dormant?: boolean;
 };
 
 /**
  * Circuit grid with firing nodes — Design System §09 (data/verification pattern).
  */
-export function CircuitGridCanvas({ className }: CircuitGridCanvasProps) {
+export function CircuitGridCanvas({
+  className,
+  dormant = false,
+}: CircuitGridCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -66,12 +70,15 @@ export function CircuitGridCanvas({ className }: CircuitGridCanvasProps) {
 
       nodes.forEach((node) => {
         const pulse = 0.35 + Math.sin(t * node.speed + node.phase) * 0.35;
+        const baseAlpha = dormant ? 0.03 : 0.06;
+        const pulseAlpha = dormant ? 0.06 : 0.14;
+
         ctx.beginPath();
         ctx.arc(node.x, node.y, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(125, 211, 252, ${0.06 + pulse * 0.14})`;
+        ctx.fillStyle = `rgba(125, 211, 252, ${baseAlpha + pulse * pulseAlpha})`;
         ctx.fill();
 
-        if (pulse > 0.55) {
+        if (!dormant && pulse > 0.55) {
           ctx.beginPath();
           ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
           ctx.fillStyle = CANVAS_TOKENS.accentBright;
@@ -96,7 +103,7 @@ export function CircuitGridCanvas({ className }: CircuitGridCanvasProps) {
       cancelAnimationFrame(raf);
       ro.disconnect();
     };
-  }, []);
+  }, [dormant]);
 
   return (
     <canvas

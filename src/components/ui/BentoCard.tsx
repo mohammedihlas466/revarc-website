@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 type BentoCardProps = {
   children: ReactNode;
   className?: string;
-  colSpan?: 4 | 5 | 7 | 12;
+  colSpan?: 4 | 5 | 6 | 7 | 12;
   ghostNumeral?: string;
   borderGlow?: boolean;
   "aria-labelledby"?: string;
@@ -43,6 +43,7 @@ export function BentoCard({
         className={cn(
           "bento-card-slot",
           colSpan === 7 && "bento-card-slot--7",
+          colSpan === 6 && "bento-card-slot--6",
           colSpan === 5 && "bento-card-slot--5",
           colSpan === 4 && "bento-card-slot--4",
           colSpan === 12 && "bento-card-slot--12"
@@ -58,6 +59,7 @@ export function BentoCard({
       className={cn(
         "bento-card-slot",
         colSpan === 7 && "bento-card-slot--7",
+        colSpan === 6 && "bento-card-slot--6",
         colSpan === 5 && "bento-card-slot--5",
         colSpan === 4 && "bento-card-slot--4",
         colSpan === 12 && "bento-card-slot--12"
