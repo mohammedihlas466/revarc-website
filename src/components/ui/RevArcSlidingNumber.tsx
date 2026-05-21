@@ -18,10 +18,7 @@ export function RevArcSlidingNumber({
   padStart = false,
 }: RevArcSlidingNumberProps) {
   return (
-    <span
-      className={cn("revarc-sliding-number", className)}
-      aria-hidden="true"
-    >
+    <span className={cn("revarc-sliding-number", className)}>
       <SlidingNumber value={value} padStart={padStart} />
     </span>
   );

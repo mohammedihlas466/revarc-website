@@ -48,11 +48,11 @@ export function FieldStudyMetricsPolar() {
       }
 
       gsap.from(cards, {
-        y: 48,
+        y: 40,
         opacity: 0,
-        duration: 0.9,
-        ease: "expo.out",
-        stagger: 0.12,
+        duration: 1.1,
+        ease: "power2.out",
+        stagger: 0.14,
         immediateRender: false,
         scrollTrigger: {
           trigger: grid,

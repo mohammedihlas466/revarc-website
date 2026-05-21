@@ -1,5 +1,6 @@
 "use client";
 
+import { RevArcBorderGlow } from "@/components/ui/RevArcBorderGlow";
 import { fontDisplay, fontMono, fontUi } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
@@ -26,40 +27,51 @@ export function FieldStudyPolarMetricCard({
   const titleId = `polar-metric-${index.replace(/\s+/g, "-").toLowerCase()}`;
 
   return (
-    <article
-      className={cn("polar-metric-card", className)}
-      aria-labelledby={titleId}
-    >
-      <div className="polar-metric-card__visual">{visual}</div>
-      <div className="polar-metric-card__body">
-        <p id={titleId} className={cn("polar-metric-card__index", fontUi.className)}>
-          {index}
-        </p>
-        <hr className="polar-metric-card__rule" aria-hidden="true" />
-        {valueHighlight ? (
-          <p className={cn("polar-metric-card__value", fontDisplay.className)}>
-            {valueHighlight}
-          </p>
-        ) : null}
-        <p className={cn("polar-metric-card__caption", fontUi.className)}>
-          {caption}
-        </p>
-        {subCaption ? (
-          <p className={cn("polar-metric-card__sub", fontUi.className)}>
-            {subCaption}
-          </p>
-        ) : null}
-        {statusTag ? (
-          <span
-            className={cn(
-              "status-tag-confirmed polar-metric-card__tag",
-              fontMono.className
-            )}
-          >
-            {statusTag}
-          </span>
-        ) : null}
-      </div>
-    </article>
+    <div className={cn("polar-metric-card-slot", className)}>
+      <RevArcBorderGlow className="polar-metric-border-glow">
+        <article
+          className="polar-metric-card bento-card"
+          aria-labelledby={titleId}
+        >
+          <div className="bento-card-inner polar-metric-card__inner">
+            <div className="polar-metric-card__visual">{visual}</div>
+            <div className="polar-metric-card__body">
+              <p
+                id={titleId}
+                className={cn("polar-metric-card__index", fontUi.className)}
+              >
+                {index}
+              </p>
+              <hr className="polar-metric-card__rule" aria-hidden="true" />
+              {valueHighlight ? (
+                <p
+                  className={cn("polar-metric-card__value", fontDisplay.className)}
+                >
+                  {valueHighlight}
+                </p>
+              ) : null}
+              <p className={cn("polar-metric-card__caption", fontUi.className)}>
+                {caption}
+              </p>
+              {subCaption ? (
+                <p className={cn("polar-metric-card__sub", fontUi.className)}>
+                  {subCaption}
+                </p>
+              ) : null}
+              {statusTag ? (
+                <span
+                  className={cn(
+                    "status-tag-confirmed polar-metric-card__tag",
+                    fontMono.className
+                  )}
+                >
+                  {statusTag}
+                </span>
+              ) : null}
+            </div>
+          </div>
+        </article>
+      </RevArcBorderGlow>
+    </div>
   );
 }

@@ -7,19 +7,30 @@ import { cn } from "@/lib/utils";
 
 const TARGET = 1_000_000;
 
-function ThreeDigitSlide({ value }: { value: number }) {
-  const clamped = Math.min(999, Math.max(0, value));
-  const digits = String(clamped).padStart(3, "0").split("");
+function MillionDisplay({ value }: { value: number }) {
+  const clamped = Math.min(TARGET, Math.max(0, value));
+  const millions = Math.floor(clamped / 1_000_000);
+  const thousands = Math.floor((clamped % 1_000_000) / 1_000);
+  const ones = clamped % 1_000;
+  const thousandsDigits = String(thousands).padStart(3, "0").split("");
+  const onesDigits = String(ones).padStart(3, "0").split("");
 
   return (
-    <span className="polar-sliding-million__group">
-      {digits.map((digit, index) => (
-        <RevArcSlidingNumber
-          key={`${index}-${digit}`}
-          value={parseInt(digit, 10)}
-        />
-      ))}
-    </span>
+    <>
+      <RevArcSlidingNumber value={millions} className="polar-sliding-million__lead" />
+      <span className="polar-sliding-million__sep">,</span>
+      <span className="polar-sliding-million__group" aria-hidden="true">
+        {thousandsDigits.map((digit, index) => (
+          <RevArcSlidingNumber key={`t-${index}`} value={parseInt(digit, 10)} />
+        ))}
+      </span>
+      <span className="polar-sliding-million__sep">,</span>
+      <span className="polar-sliding-million__group" aria-hidden="true">
+        {onesDigits.map((digit, index) => (
+          <RevArcSlidingNumber key={`o-${index}`} value={parseInt(digit, 10)} />
+        ))}
+      </span>
+    </>
   );
 }
 
@@ -45,12 +56,13 @@ export function PolarRetroCountdown({ className }: PolarRetroCountdownProps) {
         return;
       }
 
+      setValue(0);
       const counter = { val: 0 };
 
       gsap.to(counter, {
         val: TARGET,
-        duration: 2.8,
-        ease: "expo.out",
+        duration: 4.6,
+        ease: "power2.inOut",
         scrollTrigger: {
           trigger: root,
           start: "top 88%",
@@ -68,30 +80,14 @@ export function PolarRetroCountdown({ className }: PolarRetroCountdownProps) {
     { scope: rootRef }
   );
 
-  const millions = Math.min(1, Math.floor(value / 1_000_000));
-  const thousands = Math.floor((value % 1_000_000) / 1_000);
-  const ones = value % 1_000;
-  const showMillions = millions > 0;
-
   return (
     <div
       ref={rootRef}
       className={cn("polar-metric-hero polar-metric-hero--number", className)}
       aria-label="One million confirmed direct bookings"
     >
-      <div className="polar-sliding-million" aria-hidden="true">
-        {showMillions ? (
-          <>
-            <RevArcSlidingNumber
-              value={millions}
-              className="polar-sliding-million__lead"
-            />
-            <span className="polar-sliding-million__sep">,</span>
-          </>
-        ) : null}
-        <ThreeDigitSlide value={thousands} />
-        <span className="polar-sliding-million__sep">,</span>
-        <ThreeDigitSlide value={ones} />
+      <div className="polar-sliding-million">
+        <MillionDisplay value={value} />
       </div>
     </div>
   );

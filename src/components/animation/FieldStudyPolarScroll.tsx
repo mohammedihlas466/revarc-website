@@ -41,22 +41,20 @@ function PolarWord({
 }
 
 /**
- * Polar.sh-style narrative — one left rail, one pin, sequential word reveal (02 + 03).
+ * Polar.sh-style word reveal — scroll-scrubbed (no pin; safe with Lenis).
  */
 export function FieldStudyPolarScroll({
   beats,
   className,
 }: FieldStudyPolarScrollProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const section = sectionRef.current;
-      const sticky = stickyRef.current;
       const thumb = thumbRef.current;
-      if (!section || !sticky) return;
+      if (!section) return;
 
       const words = gsap.utils.toArray<HTMLElement>(
         section.querySelectorAll(".field-study-polar-word")
@@ -77,14 +75,11 @@ export function FieldStudyPolarScroll({
 
       gsap.set(words, { opacity: 0.12 });
 
-      ScrollTrigger.create({
+      const st = ScrollTrigger.create({
         trigger: section,
-        start: "top top",
-        end: "+=165%",
-        pin: sticky,
-        pinSpacing: true,
-        scrub: 0.45,
-        anticipatePin: 1,
+        start: "top 78%",
+        end: "bottom 22%",
+        scrub: 0.55,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const progress = self.progress;
@@ -112,6 +107,10 @@ export function FieldStudyPolarScroll({
           }
         },
       });
+
+      return () => {
+        st.kill();
+      };
     },
     { scope: sectionRef, dependencies: [beats] }
   );
@@ -121,7 +120,7 @@ export function FieldStudyPolarScroll({
       ref={sectionRef}
       className={cn("field-study-polar-group", className)}
     >
-      <div ref={stickyRef} className="field-study-polar-group__pin">
+      <div className="field-study-polar-group__body">
         <div className="field-study-polar-group__layout">
           <div className="field-study-polar-rail" aria-hidden="true">
             <div className="field-study-polar-rail__track">
@@ -155,7 +154,7 @@ export function FieldStudyPolarScroll({
                     >
                       {segmentWords.map((word, wordIndex) => (
                         <PolarWord
-                          key={`${beat.index}-${word}-${wordIndex}`}
+                          key={`${beat.index}-${wordIndex}`}
                           word={word}
                           variant="display"
                         />

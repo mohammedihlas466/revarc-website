@@ -1779,19 +1779,14 @@ main {
   position: relative;
   width: 100%;
   max-width: 100%;
-  overflow: hidden;
+  z-index: 1;
 }
 
-.field-study-polar-group__pin {
+.field-study-polar-group__body {
   width: 100%;
   max-width: 100%;
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
   padding: clamp(40px, 8vh, 96px) 0;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 .field-study-polar-group__layout {
@@ -1940,42 +1935,60 @@ main {
   align-items: stretch;
 }
 
-.polar-metric-card {
+.polar-metric-card-slot {
   grid-column: span 4;
+  min-width: 0;
+}
+
+.polar-metric-border-glow.border-glow-card {
+  min-height: 360px;
+  height: 100%;
+  border-radius: var(--card-radius);
+}
+
+.polar-metric-border-glow .border-glow-inner {
+  border-radius: var(--card-radius);
+  overflow: visible;
+}
+
+.polar-metric-card {
   display: flex;
   flex-direction: column;
-  min-height: 520px;
-  aspect-ratio: 3 / 5;
-  max-height: 640px;
+  min-height: 360px;
+  height: 100%;
   padding: 0;
-  background: var(--obsidian);
-  border: 1px solid var(--border-whisper);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: border-color var(--duration-fast) ease;
+  border-radius: var(--card-radius);
 }
 
-.polar-metric-card:hover {
-  border-color: rgba(192, 192, 192, 0.12);
+.bento-border-glow.polar-metric-border-glow .polar-metric-card {
+  border-color: transparent;
 }
 
-/* ~58% visual / ~42% copy — matches polar.sh feature cards */
+.polar-metric-card__inner {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Squarer, shorter cards — ~52% visual / ~48% copy */
 .polar-metric-card__visual {
-  flex: 0 0 58%;
+  flex: 1 1 52%;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 300px;
-  padding: clamp(28px, 4vw, 44px) clamp(20px, 3vw, 28px);
+  min-height: 0;
+  padding: clamp(20px, 3vw, 32px) clamp(16px, 2.5vw, 24px) clamp(8px, 1.5vw, 16px);
   position: relative;
+  overflow: visible;
 }
 
 .polar-metric-card__body {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 clamp(22px, 3vw, 30px) clamp(26px, 3.2vw, 34px);
+  padding: 0 clamp(20px, 2.8vw, 26px) clamp(22px, 3vw, 28px);
 }
 
 .polar-metric-card__index {
@@ -2033,20 +2046,18 @@ main {
 .polar-metric-hero {
   display: block;
   width: 100%;
-  max-width: 200px;
   height: auto;
   margin: 0 auto;
 }
 
 .polar-metric-hero--check,
 .polar-metric-hero--star {
-  max-width: 168px;
-  min-height: 200px;
+  max-width: 128px;
+  max-height: 128px;
 }
 
 .polar-metric-hero--number {
   max-width: 100%;
-  min-height: 120px;
 }
 
 /* Sliding number — odometer (Motion Primitives / Aceternity pattern) */
@@ -2054,7 +2065,7 @@ main {
   display: inline-flex;
   align-items: center;
   font-family: var(--font-ui);
-  font-size: clamp(36px, 5.2vw, 56px);
+  font-size: clamp(28px, 3.8vw, 44px);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -2070,13 +2081,23 @@ main {
   gap: 0;
   width: 100%;
   max-width: 100%;
-  transform: scale(1);
+  min-height: 1.15em;
+  overflow: visible;
   transform-origin: center center;
+}
+
+.revarc-sliding-number > div {
+  overflow: visible;
+}
+
+.revarc-sliding-number .relative {
+  min-height: 1em;
+  line-height: 1;
 }
 
 .polar-sliding-million__sep {
   font-family: var(--font-ui);
-  font-size: clamp(36px, 5.2vw, 56px);
+  font-size: clamp(28px, 3.8vw, 44px);
   font-weight: 300;
   line-height: 1;
   color: var(--silver-mid);
@@ -2092,11 +2113,6 @@ main {
 .polar-sliding-million__lead .revarc-sliding-number {
   margin-right: 0.02em;
 }
-
-.polar-check-rays {
-  transform-origin: 100px 118px;
-}
-
 
 /* Scroll-driven staggered spotlight */
 .scroll-spotlight {
@@ -2198,22 +2214,13 @@ main {
     grid-column: span 12;
   }
 
-  .polar-metric-card {
+  .polar-metric-card-slot {
     grid-column: span 12;
-    aspect-ratio: auto;
-    min-height: 460px;
-    max-height: none;
   }
 
-  .polar-metric-card__visual {
-    min-height: 260px;
-    flex-basis: 54%;
-  }
-
-  .polar-metric-hero--check,
-  .polar-metric-hero--star {
-    max-width: 148px;
-    min-height: 180px;
+  .polar-metric-border-glow.border-glow-card,
+  .polar-metric-card {
+    min-height: 340px;
   }
 }
 
@@ -2249,22 +2256,24 @@ main {
     gap: 40px;
   }
 
+  .polar-metric-border-glow.border-glow-card,
   .polar-metric-card {
-    min-height: 400px;
+    min-height: 320px;
   }
 
   .polar-metric-card__visual {
-    min-height: 220px;
-    padding: 24px 16px;
+    padding: 20px 14px 10px;
   }
 
   .revarc-sliding-number,
   .polar-sliding-million__sep {
-    font-size: clamp(28px, 8vw, 40px);
+    font-size: clamp(22px, 6.5vw, 32px);
   }
 
-  .polar-sliding-million {
-    transform: scale(0.88);
+  .polar-metric-hero--check,
+  .polar-metric-hero--star {
+    max-width: 108px;
+    max-height: 108px;
   }
 
   .polar-metric-card__caption,
@@ -2277,7 +2286,7 @@ main {
     gap: 16px;
   }
 
-  .field-study-polar-group__pin {
+  .field-study-polar-group__body {
     padding: 32px 0;
   }
 
@@ -2346,9 +2355,7 @@ main {
     transform: none;
   }
 
-  .field-study-polar-group__pin {
-    position: relative;
-    min-height: auto;
+  .field-study-polar-group__body {
     padding: 40px 0;
   }
 
