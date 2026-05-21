@@ -1,12 +1,11 @@
 "use client";
 
 import { useRef } from "react";
+import { ScrollSpotlightText } from "@/components/animation/ScrollSpotlightText";
 import { SectionHeader } from "@/components/layout/SectionHeader";
 import { YearCard } from "@/components/ui/YearCard";
 import { useScrollAnimationReady } from "@/hooks/useScrollAnimationReady";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { fontUi } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
 
 const SUBTITLE =
   "RevArc partnerships are structured as 3-year strategic engagements with annual milestones. Each year builds on the last. The value compounds. The owner's share of the gains grows every year the relationship matures.";
@@ -73,14 +72,9 @@ export function HowWeWorkPartnershipSection() {
       const cards = gsap.utils.toArray<HTMLElement>(
         ".how-partnership-year .bento-card"
       );
-      const closing = section.querySelector(".how-partnership-closing");
 
       if (reduceMotion) {
-        gsap.set([...cards, closing].filter(Boolean), {
-          opacity: 1,
-          y: 0,
-          clearProps: "all",
-        });
+        gsap.set(cards, { opacity: 1, y: 0, clearProps: "all" });
         return;
       }
 
@@ -99,21 +93,6 @@ export function HowWeWorkPartnershipSection() {
         },
       });
 
-      if (closing) {
-        gsap.from(closing, {
-          y: 24,
-          opacity: 0,
-          duration: 0.8,
-          ease: "expo.out",
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: closing,
-            start: "top 85%",
-            toggleActions: "play none none none",
-            once: true,
-          },
-        });
-      }
     },
     { scope: sectionRef, dependencies: [scrollReady] }
   );
@@ -148,9 +127,9 @@ export function HowWeWorkPartnershipSection() {
         ))}
       </div>
 
-      <p className={cn("how-partnership-closing", fontUi.className)}>
-        {CLOSING}
-      </p>
+      <div className="how-partnership-closing">
+        <ScrollSpotlightText text={CLOSING} variant="display" />
+      </div>
     </section>
   );
 }

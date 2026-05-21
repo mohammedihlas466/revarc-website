@@ -5370,12 +5370,36 @@ main {
 }
 
 .how-partnership-closing {
-  margin: 40px auto 0;
-  max-width: 560px;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.75;
-  color: var(--text-secondary);
+  margin: clamp(72px, 12vh, 140px) auto 0;
+  padding: clamp(80px, 14vh, 180px) clamp(20px, 5vw, 48px);
+  width: 100%;
+  max-width: min(960px, 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.how-partnership-closing .scroll-spotlight {
+  width: 100%;
+}
+
+.how-partnership-closing .scroll-spotlight-copy {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: min(34ch, 100%);
+  font-size: clamp(34px, 5.5vw, 64px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.how-partnership-closing .scroll-spotlight-beam {
+  inset: -18% -12%;
+  background: radial-gradient(
+    ellipse 62% 42% at 50% var(--spotlight-y),
+    var(--accent-glow-strong),
+    transparent 68%
+  );
 }
 
 /* §E Investment */
@@ -5616,6 +5640,17 @@ main {
   .year-label {
     font-size: 48px;
     margin-bottom: 16px;
+  }
+
+  .how-partnership-closing {
+    margin-top: 48px;
+    padding: 56px 20px 72px;
+  }
+
+  .how-partnership-closing .scroll-spotlight-copy {
+    max-width: none;
+    font-size: clamp(28px, 7.5vw, 40px);
+    line-height: 1.14;
   }
 
   .how-investment-roi .bento-card-inner,
