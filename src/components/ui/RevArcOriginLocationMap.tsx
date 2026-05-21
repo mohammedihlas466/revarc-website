@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LocationMap } from "@/components/ui/expanded-map";
 
-function getMapDimensions(viewportWidth: number) {
-  const width = Math.min(520, Math.max(280, viewportWidth - 40));
+function getMapDimensions(containerWidth: number) {
+  const width = Math.floor(Math.min(520, Math.max(240, containerWidth)));
   return {
     collapsedWidth: width,
     collapsedHeight: Math.round(width * 0.615),
@@ -18,29 +18,49 @@ function getMapDimensions(viewportWidth: number) {
  * Coordinates: Tranquil Escape Villa, Hikkaduwa.
  */
 export function RevArcOriginLocationMap() {
-  const [dims, setDims] = useState(() =>
-    getMapDimensions(typeof window !== "undefined" ? window.innerWidth : 390)
-  );
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [dims, setDims] = useState({
+    collapsedWidth: 320,
+    collapsedHeight: 197,
+    expandedWidth: 320,
+    expandedHeight: 283,
+  });
 
   useEffect(() => {
-    const update = () => setDims(getMapDimensions(window.innerWidth));
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    const el = wrapRef.current;
+    if (!el) return;
+
+    const measure = () => {
+      const w = el.getBoundingClientRect().width;
+      if (w > 0) setDims(getMapDimensions(w));
+    };
+
+    measure();
+    const ro = new ResizeObserver(() => measure());
+    ro.observe(el);
+    window.addEventListener("resize", measure);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, []);
 
   return (
-    <LocationMap
-      className="revarc-location-map about-origin-location-map"
-      location="Tranquil Escape Villa"
-      latitude={6.1408}
-      longitude={80.101}
-      zoom={14}
-      tileProvider="carto-dark"
-      collapsedWidth={dims.collapsedWidth}
-      collapsedHeight={dims.collapsedHeight}
-      expandedWidth={dims.expandedWidth}
-      expandedHeight={dims.expandedHeight}
-    />
+    <div ref={wrapRef} className="about-origin-map-wrap">
+      <LocationMap
+        className="revarc-location-map about-origin-location-map"
+        location="Tranquil Escape Villa"
+        latitude={6.1408}
+        longitude={80.101}
+        zoom={14}
+        tileProvider="carto-dark"
+        collapsedWidth={dims.collapsedWidth}
+        collapsedHeight={dims.collapsedHeight}
+        expandedWidth={dims.expandedWidth}
+        expandedHeight={dims.expandedHeight}
+        disableTilt
+      />
+    </div>
   );
 }

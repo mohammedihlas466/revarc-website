@@ -133,18 +133,25 @@ export default function DarkVeil({
 
     const mesh = new Mesh(gl, { geometry, program });
 
+    const resizeRoot =
+      parent.closest('.about-hero-bg-stack') ||
+      parent.closest('.about-hero-darkveil-layer') ||
+      parent;
+
     const resize = () => {
-      const rect = parent.getBoundingClientRect();
+      const rect = resizeRoot.getBoundingClientRect();
       const w = Math.round(rect.width);
       const h = Math.round(rect.height);
       if (w < 1 || h < 1) return;
 
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
       renderer.setSize(w * resolutionScale, h * resolutionScale);
       program.uniforms.uResolution.value.set(w, h);
     };
 
     const ro = new ResizeObserver(() => resize());
-    ro.observe(parent);
+    ro.observe(resizeRoot);
 
     window.addEventListener("resize", resize);
     resize();

@@ -32,6 +32,8 @@ interface LocationMapProps {
   expandedWidth?: number;
   /** Expanded card height (px) */
   expandedHeight?: number;
+  /** Disable 3D tilt (mobile / touch) */
+  disableTilt?: boolean;
 }
 
 const TILE_SIZE = 256;
@@ -89,6 +91,7 @@ export function LocationMap({
   collapsedHeight = 140,
   expandedWidth = 360,
   expandedHeight = 280,
+  disableTilt = false,
 }: LocationMapProps) {
   const gridPatternId = useId().replace(/:/g, "");
   const [isHovered, setIsHovered] = useState(false);
@@ -207,7 +210,8 @@ export function LocationMap({
       aria-label={`${location} map. ${isExpanded ? "Collapse" : "Expand"} location map.`}
       className={`relative mx-auto w-full max-w-full cursor-pointer select-none ${className ?? ""}`}
       style={{
-        perspective: 1000,
+        perspective: disableTilt ? undefined : 1000,
+        width: "100%",
         maxWidth: isExpanded ? expandedWidth : collapsedWidth,
       }}
       onMouseMove={handleMouseMove}
@@ -218,14 +222,20 @@ export function LocationMap({
     >
       <motion.div
         className="revarc-location-map__card relative overflow-hidden rounded-[var(--card-radius)] border border-[var(--border-whisper)] bg-[var(--obsidian)]"
-        style={{
-          rotateX: springRotateX,
-          rotateY: springRotateY,
-          transformStyle: "preserve-3d",
-        }}
+        style={
+          disableTilt
+            ? { maxWidth: "100%" }
+            : {
+                rotateX: springRotateX,
+                rotateY: springRotateY,
+                transformStyle: "preserve-3d",
+                maxWidth: "100%",
+              }
+        }
         animate={{
           width: isExpanded ? expandedWidth : collapsedWidth,
           height: isExpanded ? expandedHeight : collapsedHeight,
+          ...(disableTilt ? { rotateX: 0, rotateY: 0 } : {}),
         }}
         transition={{
           type: "spring",
